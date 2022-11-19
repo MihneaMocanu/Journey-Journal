@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(bodyParser.json());
 app.use(cors()); 
-app.use("/api", router);
+app.use("/proiect", router);
 
 let serverPort = 8080; 
 
