@@ -41,7 +41,7 @@ const updateAgglomerationById = async (req, res) => {
       req.params.agglomerationId
     );
     if (agglomeration) {
-      const updatedAgglomeration = await Agglomeration.update(req.body);
+      const updatedAgglomeration = await agglomeration.update(req.body);
       return res.status(200).json(updatedAgglomeration);
     } else {
       return res.status(404).json({

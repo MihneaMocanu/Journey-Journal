@@ -37,7 +37,7 @@ const updateTransportById = async (req, res) => {
   try {
     const transportBy = await TransportBy.findByPk(req.params.transportById);
     if (transportBy) {
-      const updatedTransportBy = await TransportBy.update(req.body);
+      const updatedTransportBy = await transportBy.update(req.body);
       return res.status(200).json(updatedTransportBy);
     } else {
       return res.status(404).json({

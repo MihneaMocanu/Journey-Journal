@@ -37,7 +37,7 @@ const updateExperienceById = async (req, res) => {
   try {
     const experience = await Experience.findByPk(req.params.experienceId);
     if (experience) {
-      const updatedExperience = await Experience.update(req.body);
+      const updatedExperience = await experience.update(req.body);
       return res.status(200).json(updatedExperience);
     } else {
       return res.status(404).json({
