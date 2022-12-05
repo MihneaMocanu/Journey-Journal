@@ -39,14 +39,4 @@ const Experience = sequelize.define(
   }
 );
 
-//Associations
-User.hasOne(Experience);
-Experience.belongsTo(User);
-Satisfaction.hasOne(Experience);
-Experience.belongsTo(Satisfaction);
-TransportBy.hasOne(Experience);
-Experience.belongsTo(TransportBy);
-Agglomeration.hasOne(Experience);
-Experience.belongsTo(Agglomeration);
-
 export { Experience };
