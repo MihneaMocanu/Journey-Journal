@@ -37,7 +37,7 @@ const updateUserById = async (req, res) => {
   try {
     const user = await User.findByPk(req.params.userId);
     if (user) {
-      const updatedUser = await User.update(req.body);
+      const updatedUser = await user.update(req.body);
       return res.status(200).json(updatedUser);
     } else {
       return res

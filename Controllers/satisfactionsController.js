@@ -37,7 +37,7 @@ const updateSatisfactionById = async (req, res) => {
   try {
     const satisfaction = await Satisfaction.findByPk(req.params.satisfactionId);
     if (satisfaction) {
-      const updatedSatisfaction = await Satisfaction.update(req.body);
+      const updatedSatisfaction = await satisfaction.update(req.body);
       return res.status(200).json(updatedSatisfaction);
     } else {
       return res.status(404).json({
