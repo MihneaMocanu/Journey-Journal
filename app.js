@@ -3,6 +3,7 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import { sequelize } from "./sequelize.js";
 import { usersRouter } from "./Routes/usersRouter.js";
+import { mainRouter } from "./Routes/mainRouter.js";
 import { transportsByRouter } from "./Routes/trasnsportsByRouter.js";
 import { satisfactionsRouter } from "./Routes/satisfactionsRouter.js";
 import { agglomerationsRouter } from "./Routes/agglomerationsRouter.js";
@@ -25,17 +26,18 @@ app.use(cors());
 
 User.hasMany(Experience);
 
-Experience.hasOne(Satisfaction);
+Satisfaction.hasOne(Experience);
 
-Experience.hasOne(TransportBy);
+TransportBy.hasOne(Experience);
 
-Experience.hasOne(Agglomeration);
+Agglomeration.hasOne(Experience);
 
 app.use("/project", usersRouter);
 app.use("/project", transportsByRouter);
 app.use("/project", satisfactionsRouter);
 app.use("/project", agglomerationsRouter);
 app.use("/project", experienceRouter);
+app.use("/project", mainRouter);
 
 app.listen(5001, async () => {
   console.log("Express web server running on port 5001");
