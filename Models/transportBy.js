@@ -5,8 +5,8 @@ const TransportBy = sequelize.define(
   "TransportBy",
   {
     id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
     },
     vehicleType: {

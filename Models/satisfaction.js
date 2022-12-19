@@ -5,16 +5,12 @@ const Satisfaction = sequelize.define(
   "Satisfaction",
   {
     id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
     },
     level: {
-      type: DataTypes.INTEGER,
-      validate: {
-        min: 1,
-        max: 5,
-      },
+      type: DataTypes.STRING
     },
   },
   {
