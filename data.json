@@ -1,137 +1,137 @@
 {
-    "agglomeration": [
-        {
-            "id": "be4ca873-6f19-4d7a-8154-178e7f647456",
-            "level": "Extremely busy"
-        },
-        {
-            "id": "3696074e-8231-49c7-95e8-7707f76da761",
-            "level": "Very busy"
-        },
-        {
-            "id": "f046d08e-2b0d-446d-9e70-9cc89868a80d",
-            "level": "Busy"
-        },
-        {
-            "id": "7cf8f8db-8476-4f25-a080-b2e0d536e1f8",
-            "level": "Slightly busy"
-        },
-        {
-            "id": "36cc659a-295e-4aab-8f6f-c127865405c9",
-            "level": "Not busy"
-        }
-    ],
-    "satisfaction": [
-        {
-            "id": "0e06f027-4f40-40f6-a46b-050f7ffc7caf",
-            "level": "Extremely satisfied"
-        },
-        {
-            "id": "fc425077-afc7-4e85-9ec7-0f2e9b6d9114",
-            "level": "Very satisfied"
-        },
-        {
-            "id": "aea80e3b-efec-4574-a74e-19dcceae5c77",
-            "level": "Satisfied"
-        },
-        {
-            "id": "9e6896a2-793d-4276-9f8c-76042c70469d",
-            "level": "Slightly satisfied"
-        },
-        {
-            "id": "b5b73faa-c9c8-4ad1-8768-d89e96e0ae97",
-            "level": "Not Satisfied"
-        }
-    ],
-    "transportsBy": [
-        {
-            "id": "0a6a95d6-3ac8-4b03-a468-65afabea4254",
-            "vehicleType": "Car"
-        },
-        {
-            "id": "973e094d-e6f5-4c74-8436-49c2d69ffc22",
-            "vehicleType": "Bus"
-        },
-        {
-            "id": "106ef214-8207-4c54-a8ea-8812a7bfe44f",
-            "vehicleType": "Metro"
-        },
-        {
-            "id": "601c6a3f-d311-4a60-9853-006d8ec83eeb",
-            "vehicleType": "Tram"
-        },
-        {
-            "id": "bb01b047-b132-4fd3-9f15-dcd6fe1c6e7f",
-            "vehicleType": "Bike"
-        },
-        {
-            "id": "b6a66de7-4f56-4e86-bc6c-bee76be2286f",
-            "vehicleType": "Motorcycle"
-        },
-        {
-            "id": "4832c8c6-0bc0-4a6f-a5f6-1391d89b18d5",
-            "vehicleType": "Scooter"
-        }
-    ],
-    "user": [
-        {
-            "id": "57b2a086-b8e7-4196-a26e-1d2d1056041a",
-            "firstName": "Mihnea-Stefan",
-            "lastName": "Mocanu",
-            "email": "mocanumihnea20@stud.ase.ro"
-        },
-        {
-            "id": "0bbd130e-a343-44a4-954b-ae53e5ab8765",
-            "firstName": "Cosmin",
-            "lastName": "Pavel",
-            "email": "pavel1cosmin20@stud.ase.ro"
-        },
-        {
-            "id": "f2435bc4-294f-4503-99f8-e0f050b24051",
-            "firstName": "Chris-Marios",
-            "lastName": "Neagu",
-            "email": "neaguchris20@stud.ase.ro"
-        }
-    ],
-    "experience": [
-        {
-            "id": "62c9ac77-1009-401f-b1bc-515a56e7dae9",
-            "start_adress": "Vienna",
-            "end_adress": "Vienna",
-            "start_date": "2020-01-03",
-            "observation": "",
-            "duration_minutes": 15,
-            "share": 1,
-            "UserId": "57b2a086-b8e7-4196-a26e-1d2d1056041a",
-            "SatisfactionId": "0e06f027-4f40-40f6-a46b-050f7ffc7caf",
-            "TransportById": "106ef214-8207-4c54-a8ea-8812a7bfe44f",
-            "AgglomerationId": "f046d08e-2b0d-446d-9e70-9cc89868a80d"
-        },
-        {
-            "id": "64975d42-7028-45dc-a587-a0c03530062e",
-            "start_adress": "Berlin",
-            "end_adress": "Berlin",
-            "start_date": "2022-05-06",
-            "observation": "",
-            "duration_minutes": 40,
-            "share": 1,
-            "UserId": "0bbd130e-a343-44a4-954b-ae53e5ab8765",
-            "SatisfactionId": "9e6896a2-793d-4276-9f8c-76042c70469d",
-            "TransportById": "601c6a3f-d311-4a60-9853-006d8ec83eeb",
-            "AgglomerationId": "f046d08e-2b0d-446d-9e70-9cc89868a80d"
-        },
-        {
-            "id": "310763ae-c8d0-4ffd-ad3c-3b64b5e9f51b",
-            "start_adress": "Piata Romana, Bucharest",
-            "end_adress": "Sebastian, Bucharest",
-            "start_date": "2022-12-02",
-            "observation": "It was horibble. There was a homeless person and I've got caught in traffic.",
-            "duration_minutes": 45,
-            "share": 1,
-            "UserId": "f2435bc4-294f-4503-99f8-e0f050b24051",
-            "SatisfactionId": "b5b73faa-c9c8-4ad1-8768-d89e96e0ae97",
-            "TransportById": "973e094d-e6f5-4c74-8436-49c2d69ffc22",
-            "AgglomerationId": "3696074e-8231-49c7-95e8-7707f76da761"
-        }
-    ]
+  "agglomeration": [
+    {
+      "id": "be4ca873-6f19-4d7a-8154-178e7f647456",
+      "description": "Extremely busy"
+    },
+    {
+      "id": "3696074e-8231-49c7-95e8-7707f76da761",
+      "description": "Very busy"
+    },
+    {
+      "id": "f046d08e-2b0d-446d-9e70-9cc89868a80d",
+      "description": "Busy"
+    },
+    {
+      "id": "7cf8f8db-8476-4f25-a080-b2e0d536e1f8",
+      "description": "Slightly busy"
+    },
+    {
+      "id": "36cc659a-295e-4aab-8f6f-c127865405c9",
+      "description": "Not busy"
+    }
+  ],
+  "satisfaction": [
+    {
+      "id": "0e06f027-4f40-40f6-a46b-050f7ffc7caf",
+      "level": "Extremely satisfied"
+    },
+    {
+      "id": "fc425077-afc7-4e85-9ec7-0f2e9b6d9114",
+      "level": "Very satisfied"
+    },
+    {
+      "id": "aea80e3b-efec-4574-a74e-19dcceae5c77",
+      "level": "Satisfied"
+    },
+    {
+      "id": "9e6896a2-793d-4276-9f8c-76042c70469d",
+      "level": "Slightly satisfied"
+    },
+    {
+      "id": "b5b73faa-c9c8-4ad1-8768-d89e96e0ae97",
+      "level": "Not Satisfied"
+    }
+  ],
+  "transportBy": [
+    {
+      "id": "0a6a95d6-3ac8-4b03-a468-65afabea4254",
+      "vehicleType": "Car"
+    },
+    {
+      "id": "973e094d-e6f5-4c74-8436-49c2d69ffc22",
+      "vehicleType": "Bus"
+    },
+    {
+      "id": "106ef214-8207-4c54-a8ea-8812a7bfe44f",
+      "vehicleType": "Metro"
+    },
+    {
+      "id": "601c6a3f-d311-4a60-9853-006d8ec83eeb",
+      "vehicleType": "Tram"
+    },
+    {
+      "id": "bb01b047-b132-4fd3-9f15-dcd6fe1c6e7f",
+      "vehicleType": "Bike"
+    },
+    {
+      "id": "b6a66de7-4f56-4e86-bc6c-bee76be2286f",
+      "vehicleType": "Motorcycle"
+    },
+    {
+      "id": "4832c8c6-0bc0-4a6f-a5f6-1391d89b18d5",
+      "vehicleType": "Scooter"
+    }
+  ],
+  "user": [
+    {
+      "id": "57b2a086-b8e7-4196-a26e-1d2d1056041a",
+      "firstName": "Mihnea-Stefan",
+      "lastName": "Mocanu",
+      "email": "mocanumihnea20@stud.ase.ro"
+    },
+    {
+      "id": "0bbd130e-a343-44a4-954b-ae53e5ab8765",
+      "firstName": "Cosmin",
+      "lastName": "Pavel",
+      "email": "pavel1cosmin20@stud.ase.ro"
+    },
+    {
+      "id": "f2435bc4-294f-4503-99f8-e0f050b24051",
+      "firstName": "Chris-Marios",
+      "lastName": "Neagu",
+      "email": "neaguchris20@stud.ase.ro"
+    }
+  ],
+  "experience": [
+    {
+      "id": "62c9ac77-1009-401f-b1bc-515a56e7dae9",
+      "start_adress": "Vienna",
+      "end_adress": "Vienna",
+      "start_date": "2020-01-03",
+      "observation": "",
+      "duration_minutes": 15,
+      "share": 1,
+      "UserId": "57b2a086-b8e7-4196-a26e-1d2d1056041a",
+      "SatisfactionId": "0e06f027-4f40-40f6-a46b-050f7ffc7caf",
+      "TransportById": "106ef214-8207-4c54-a8ea-8812a7bfe44f",
+      "AgglomerationId": "f046d08e-2b0d-446d-9e70-9cc89868a80d"
+    },
+    {
+      "id": "64975d42-7028-45dc-a587-a0c03530062e",
+      "start_adress": "Berlin",
+      "end_adress": "Berlin",
+      "start_date": "2022-05-06",
+      "observation": "",
+      "duration_minutes": 40,
+      "share": 1,
+      "UserId": "0bbd130e-a343-44a4-954b-ae53e5ab8765",
+      "SatisfactionId": "9e6896a2-793d-4276-9f8c-76042c70469d",
+      "TransportById": "601c6a3f-d311-4a60-9853-006d8ec83eeb",
+      "AgglomerationId": "f046d08e-2b0d-446d-9e70-9cc89868a80d"
+    },
+    {
+      "id": "310763ae-c8d0-4ffd-ad3c-3b64b5e9f51b",
+      "start_adress": "Piata Romana, Bucharest",
+      "end_adress": "Sebastian, Bucharest",
+      "start_date": "2022-12-02",
+      "observation": "It was horibble. There was a homeless person and I've got caught in traffic.",
+      "duration_minutes": 45,
+      "share": 1,
+      "UserId": "f2435bc4-294f-4503-99f8-e0f050b24051",
+      "SatisfactionId": "b5b73faa-c9c8-4ad1-8768-d89e96e0ae97",
+      "TransportById": "973e094d-e6f5-4c74-8436-49c2d69ffc22",
+      "AgglomerationId": "3696074e-8231-49c7-95e8-7707f76da761"
+    }
+  ]
 }
