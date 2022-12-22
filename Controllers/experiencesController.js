@@ -9,6 +9,17 @@ const getAllExperiencesFromDB = async (req, res) => {
   }
 };
 
+const getUserExperciencesByUserId = async (req, res) => {
+  try {
+    const experiences = await Experience.findAll({
+      where: { UserId: req.params.UserId },
+    });
+    return res.status(200).json(experiences);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
+
 const getExperienceFromDBById = async (req, res) => {
   try {
     const experience = await Experience.findByPk(req.params.experienceId);
@@ -71,4 +82,5 @@ export {
   insertExperienceIntoDB,
   updateExperienceById,
   deleteExperience,
+  getUserExperciencesByUserId,
 };
