@@ -8,6 +8,10 @@ router.get(
   "/experiences/:experienceId",
   experiencesController.getExperienceFromDBById
 );
+router.get(
+  "/experiences/UserId/:UserId",
+  experiencesController.getUserExperciencesByUserId
+);
 router.post("/newExperience", experiencesController.insertExperienceIntoDB);
 router.put(
   "/experiences/:experienceId",
