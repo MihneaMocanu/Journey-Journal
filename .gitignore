@@ -1,2 +1,4 @@
 node_modules/
-sqlite/
+sqlite/sqldiff
+sqlite/sqlite3
+sqlite/sqlite3_analyzer
