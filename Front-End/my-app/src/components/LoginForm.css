@@ -1,0 +1,14 @@
+.login{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    align-items: baseline;
+    line-height: 0.5;
+}
+
+h2{
+    font-size: 1.6rem;
+}
+.login .nav-link{
+    font-size: 1.3rem;
+}
