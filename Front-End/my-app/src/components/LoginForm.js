@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { Link } from "react-router-dom";
+import "./LoginForm.css";
 
 const Container = styled.div`
+  position: fixed;
+  top: 25%;
+  left: 35%;
   display: flex;
   flex-direction: column;
-  align-items: start;
+  align-items: center;
   padding: 32px;
 `;
 
@@ -43,6 +48,7 @@ const Button = styled.button`
 `;
 
 function LoginForm() {
+  
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -71,6 +77,12 @@ function LoginForm() {
               onChange={event => setPassword(event.target.value)}
             />
           </label>
+          <div className='login'>
+            <h2>Don't have an account?</h2>
+            <Link to="/register" className="nav-link">
+              Register
+            </Link>
+          </div>
           <Button type="submit">Log in</Button>
         </Form>
       </Box>

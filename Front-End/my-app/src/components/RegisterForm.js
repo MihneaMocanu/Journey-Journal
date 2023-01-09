@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { SERVER_URL } from './constants';
+import { useSelector, useDispatch } from "react-redux";
+
 
 const Container = styled.div`
+  position: fixed;
+  top: 25%;
+  left: 35%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -43,16 +49,40 @@ const Button = styled.button`
 `;
 
 function RegisterForm() {
-
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  function handleSubmit(event) {
+  //REDUX
+  const dispatch = useDispatch();
+
+  async function handleSubmit(event) {
     event.preventDefault();
-    // Send a request to the server to verify the username and password
-  }
+    const user = {
+      firstName,
+      lastName,
+      email,
+      password
+    }
+    
+    const res = await fetch(`${SERVER_URL}/newUser`, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(user),
+    });
+    
+    if(res.status == 200){
+      const data = await res.json();
+      const id = data.id;
+      dispatch({ type: "logIn", idUser: id }); 
+      console.log(`New user ID: ${id}`);
+    }else {
+      console.error('Error adding user');
+    }
+}
 
   return (
     <Container>
