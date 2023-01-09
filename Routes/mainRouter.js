@@ -9,51 +9,41 @@ import { Experience } from "./../Models/experience.js";
 const router = express.Router();
 
 // call POST on http://localhost:5001/data
-router.post("/data", async (request, response, next) => {
+router.post("/data", async (request, response) => {
+  const obiectul_meu = request.body;
 
-    const obiectul_meu = request.body;
-    
-    try {
-
-      console.log("obiect satisfacere", request.body.satisfaction);
-
-      for(let s of request.body.satisfaction)
-      {
-        const satisfaction = await Satisfaction.create(s);
-        await satisfaction.save();
-      }
-
-      for(let a of obiectul_meu.agglomeration)
-      {
-        const agglomeration = await Agglomeration.create(a);
-        await agglomeration.save();
-      }
-
-      for(let t of obiectul_meu.transportBy)
-      {
-        const transportBy = await TransportBy.create(t);
-        await transportBy.save();
-      }
-
-      for(let u of obiectul_meu.user)
-      {
-        const user = await User.create(u);
-        await user.save();
-      }
-
-      for(let e of obiectul_meu.experience)
-      {
-        const experience = await Experience.create(e);
-        await experience.save();
-      }
-      
-      response.sendStatus(204);
-
-    } catch (error) {
-        response.sendStatus(400).json({
-            "error": error.message
-        });
+  try {
+    for (let a of obiectul_meu.agglomeration) {
+      const agglomeration = await Agglomeration.create(a);
+      await agglomeration.save();
     }
-  });
 
-  export { router as mainRouter };
+    for (let s of obiectul_meu.satisfaction) {
+      const satisfaction = await Satisfaction.create(s);
+      await satisfaction.save();
+    }
+
+    for (let t of obiectul_meu.transportBy) {
+      const transportBy = await TransportBy.create(t);
+      await transportBy.save();
+    }
+
+    for (let u of obiectul_meu.user) {
+      const user = await User.create(u);
+      await user.save();
+    }
+
+    for (let e of obiectul_meu.experience) {
+      const experience = await Experience.create(e);
+      await experience.save();
+    }
+
+    response.sendStatus(204);
+  } catch (error) {
+    response.sendStatus(400).json({
+      error: error.message,
+    });
+  }
+});
+
+export { router as mainRouter };

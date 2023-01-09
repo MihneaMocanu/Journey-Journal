@@ -1,9 +1,5 @@
 import { sequelize } from "../sequelize.js";
 import { DataTypes } from "sequelize";
-import { User } from "./user.js";
-import { Satisfaction } from "./satisfaction.js";
-import { TransportBy } from "./transportBy.js";
-import { Agglomeration } from "./agglomeration.js";
 
 const Experience = sequelize.define(
   "Experience",
