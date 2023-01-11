@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { SERVER_URL } from './constants';
 import { useSelector, useDispatch } from "react-redux";
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Container = styled.div`
   position: fixed;
@@ -74,20 +75,53 @@ function RegisterForm() {
       body: JSON.stringify(user),
     });
     
-    if(res.status == 200){
+    if(res.status === 200){
       const data = await res.json();
       const id = data.id;
       dispatch({ type: "logIn", idUser: id }); 
       console.log(`New user ID: ${id}`);
     }else {
-      console.error('Error adding user');
+      if(!(firstName && firstName.value)){
+        toast.error("Empty first name", {
+          position: toast.POSITION.TOP_RIGHT,
+          autoClose: 3000,
+          style: {
+            marginTop: "5rem"
+          }
+        });
+      }
+      if(!(lastName && lastName.value)){
+        toast.error("Empty name", {
+          position: toast.POSITION.TOP_RIGHT,
+          autoClose: 3000
+        });
+      }
+      if(!(email && email.value)){
+        toast.error("Empty email", {
+          position: toast.POSITION.TOP_RIGHT,
+          autoClose: 3000
+        });
+      }
+      if(!(password && password.value)){
+        toast.error("Empty password", {
+          position: toast.POSITION.TOP_RIGHT,
+          autoClose: 3000
+        });
+      }else{
+        toast.error("Password must include at least one upper case, one lower, one digit, one special character", {
+          position: toast.POSITION.TOP_RIGHT,
+          autoClose: 3000
+        });
+      }
     }
 }
 
   return (
-    <Container>
-      <Box>
+    
+      <Container>
+        <Box>
         <Form onSubmit={handleSubmit}>
+         
           <label>
             First Name:
             <Input
@@ -119,11 +153,12 @@ function RegisterForm() {
               value={password}
               onChange={event => setPassword(event.target.value)}
             />
+          <ToastContainer></ToastContainer>
           </label>
           <Button type="submit">Register</Button>
         </Form>
       </Box>
-    </Container>
+     </Container>
   );
 }
 
