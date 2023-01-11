@@ -11,6 +11,7 @@
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.6.2",
     "react-scripts": "5.0.1",
+    "react-toastify": "^9.1.1",
     "redux": "^4.2.0",
     "router-dom": "^2.2.9",
     "styled-components": "^5.3.6",

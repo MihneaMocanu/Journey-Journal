@@ -54,7 +54,8 @@
   }
   
   .hero-video video {
+    position: fixed;
     width: 100% !important;
-    height: 99vh !important;
+    height: 100% !important;
     object-fit: cover;
   }

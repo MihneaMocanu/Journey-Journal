@@ -22,6 +22,15 @@ const User = sequelize.define(
       type: DataTypes.STRING,
       isEmail: true,
     },
+    password: {
+      type: DataTypes.STRING,
+      validate: {
+        is: {
+          args: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/i,
+          msg: "Eroare"
+        }
+      }
+    }
   },
   {
     tableName: "Users",
