@@ -12,8 +12,8 @@
     box-shadow: 0px 0px 10px #ccc;
     position: fixed;
     top: 15%;
-    max-height: 600px; /* set the maximum height of the form */
-    overflow-y: auto; /* make the form scrollable */
+    max-height: 600px;
+    overflow-y: auto;
 }
 
 .form-content button {
