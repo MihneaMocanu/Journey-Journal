@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { SERVER_URL } from './constants';
 import { useSelector, useDispatch } from "react-redux";
 import { ToastContainer, toast } from 'react-toastify';
+import store from "../store/store";
 import 'react-toastify/dist/ReactToastify.css';
 
 const Container = styled.div`
@@ -50,23 +51,83 @@ const Button = styled.button`
 `;
 
 function RegisterForm() {
+  //FORM FIELDS
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  //REDUX
-  const dispatch = useDispatch();
-
   async function handleSubmit(event) {
     event.preventDefault();
-    const user = {
+    let user = {
       firstName,
       lastName,
       email,
       password
     }
-    
+
+    if(firstName === ''){
+      toast.error("Empty first name", {
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: 3000,
+        style: {
+          marginTop: "5rem"
+        }
+      });
+      return;
+    }
+    if(lastName === ''){
+      toast.error("Empty name", {
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: 3000,
+        style: {
+          marginTop: "5rem"
+        }
+      });
+      return;
+    }
+    if(email === ''){
+      toast.error("Empty email", {
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: 3000,
+        style: {
+          marginTop: "5rem"
+        }
+      });
+      return;
+    }
+    if(password === ''){
+      toast.error("Empty password", {
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: 3000,
+        style: {
+          marginTop: "5rem"
+        }
+      });
+      return;
+    }else if(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/i.test(password) === false){
+      toast.error("Password must include at least one upper case, one lower, one digit, one special character", {
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: 3000,
+        style: {
+          marginTop: "5rem"
+        }
+      });
+      return;
+    }
+
+    const resEmail = await fetch(`${SERVER_URL}/users/email/${email}`);
+    if(resEmail.status === 200){
+      toast.error("Email already in use", {
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: 3000,
+        style: {
+          marginTop: "5rem"
+        }
+      });
+      return;
+    }
+
     const res = await fetch(`${SERVER_URL}/newUser`, {
       method: "post",
       headers: {
@@ -75,44 +136,18 @@ function RegisterForm() {
       body: JSON.stringify(user),
     });
     
-    if(res.status === 200){
+    if(res.status === 200){ //sucess register
       const data = await res.json();
       const id = data.id;
-      dispatch({ type: "logIn", idUser: id }); 
+      const action = { type: "logIn", idUser: id};
+      store.subscribe(() =>  store.dispatch(action));
       console.log(`New user ID: ${id}`);
+      console.log(user)
     }else {
-      if(!(firstName && firstName.value)){
-        toast.error("Empty first name", {
-          position: toast.POSITION.TOP_RIGHT,
-          autoClose: 3000,
-          style: {
-            marginTop: "5rem"
-          }
-        });
-      }
-      if(!(lastName && lastName.value)){
-        toast.error("Empty name", {
-          position: toast.POSITION.TOP_RIGHT,
-          autoClose: 3000
-        });
-      }
-      if(!(email && email.value)){
-        toast.error("Empty email", {
-          position: toast.POSITION.TOP_RIGHT,
-          autoClose: 3000
-        });
-      }
-      if(!(password && password.value)){
-        toast.error("Empty password", {
-          position: toast.POSITION.TOP_RIGHT,
-          autoClose: 3000
-        });
-      }else{
-        toast.error("Password must include at least one upper case, one lower, one digit, one special character", {
-          position: toast.POSITION.TOP_RIGHT,
-          autoClose: 3000
-        });
-      }
+      toast.error("Internal server error", {
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: 3000
+      });
     }
 }
 

@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from "react-router-dom";
 import "./LoginForm.css";
+import { SERVER_URL } from './constants';
+import { ToastContainer, toast } from 'react-toastify';
+import store from "../store/store";
+import 'react-toastify/dist/ReactToastify.css';
 
 const Container = styled.div`
   position: fixed;
@@ -49,12 +53,42 @@ const Button = styled.button`
 
 function LoginForm() {
   
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
-    // Send a request to the server to verify the username and password
+
+    const res = await fetch(`${SERVER_URL}/users/email/`, {
+      method: "get",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      params: {userEmail: email},
+    });
+
+    if(res.status === 200){ //sucess register
+    
+    }else {
+      if(!(email && email.value)){
+        toast.error("Empty password", {
+          position: toast.POSITION.TOP_RIGHT,
+          autoClose: 3000
+        });
+      }
+      if(!(password && password.value)){
+        toast.error("Empty password", {
+          position: toast.POSITION.TOP_RIGHT,
+          autoClose: 3000
+        });
+      }
+      else{
+        toast.error("Invalid creditentials", {
+          position: toast.POSITION.TOP_RIGHT,
+          autoClose: 3000
+        });
+      }
+    }
   }
 
   return (
@@ -62,11 +96,11 @@ function LoginForm() {
       <Box>
         <Form onSubmit={handleSubmit}>
           <label>
-            Username:
+            Email:
             <Input
               type="text"
-              value={username}
-              onChange={event => setUsername(event.target.value)}
+              value={email}
+              onChange={event => setEmail(event.target.value)}
             />
           </label>
           <label>
@@ -83,6 +117,7 @@ function LoginForm() {
               Register
             </Link>
           </div>
+          <ToastContainer></ToastContainer>
           <Button type="submit">Log in</Button>
         </Form>
       </Box>

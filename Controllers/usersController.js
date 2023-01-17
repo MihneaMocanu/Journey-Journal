@@ -24,6 +24,25 @@ const getUserFromDBByID = async (req, res) => {
   }
 };
 
+const getUserFromDBByEmail = async (req, res) => {
+  try {
+    const userEmail = req.params.userEmail;
+    console.log(userEmail)
+    const user = await User.findOne({ //only one email
+      where: { email : userEmail }
+    });
+    if (user) {
+      return res.status(200).json(user);
+    } else {
+      return res
+        .status(404)
+        .json({ error: `User with email ${req.params.userEmail} not found` });
+    }
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
+
 const insertUserIntoDB = async (req, res) => {
   try {
     console.log(req.body);
@@ -69,6 +88,7 @@ const deleteUser = async (req, res) => {
 export {
   getAllUsersFromDB,
   getUserFromDBByID,
+  getUserFromDBByEmail,
   insertUserIntoDB,
   updateUserById,
   deleteUser,
