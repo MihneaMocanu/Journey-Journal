@@ -9,7 +9,7 @@ function Home() {
             <div className= 'hero-text'>
                 <h2>O mulțime de oameni scriu pe Journey Journal</h2>
                 <h2>Vrei să scrii <span>și tu</span> ?</h2>
-                <Link to="/postareNoua" className="nav-link">
+                <Link to="/newPost" className="nav-link">
                         Postează acum!
                 </Link>
             </div>
