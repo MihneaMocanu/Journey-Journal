@@ -1,1 +1,1 @@
-# Acesta este proiectul la Tehnologii Web
+# Web project for university
