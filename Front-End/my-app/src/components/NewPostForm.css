@@ -1,4 +1,5 @@
 .form-box {
+    background: url("./world-map.jpg") center / cover no-repeat;
     display: flex;
     align-items: center;
     justify-content: center;
