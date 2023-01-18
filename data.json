@@ -78,19 +78,22 @@
       "id": "57b2a086-b8e7-4196-a26e-1d2d1056041a",
       "firstName": "Mihnea-Stefan",
       "lastName": "Mocanu",
-      "email": "mocanumihnea20@stud.ase.ro"
+      "email": "mocanumihnea20@stud.ase.ro",
+      "password": "Zapada2211!"
     },
     {
       "id": "0bbd130e-a343-44a4-954b-ae53e5ab8765",
       "firstName": "Cosmin",
       "lastName": "Pavel",
-      "email": "pavel1cosmin20@stud.ase.ro"
+      "email": "pavel1cosmin20@stud.ase.ro",
+      "password": "Zapada2211!"
     },
     {
       "id": "f2435bc4-294f-4503-99f8-e0f050b24051",
       "firstName": "Chris-Marios",
       "lastName": "Neagu",
-      "email": "neaguchris20@stud.ase.ro"
+      "email": "neaguchris20@stud.ase.ro",
+      "password": "Zapada2211!"
     }
   ],
   "experience": [

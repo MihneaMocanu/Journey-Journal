@@ -1,4 +1,5 @@
 import { Experience } from "../Models/experience.js";
+import { Satisfaction } from "../Models/satisfaction.js";
 
 const getAllExperiencesFromDB = async (req, res) => {
   try {
@@ -32,6 +33,30 @@ const getExperienceFromDBById = async (req, res) => {
     }
   } catch (err) {
     req.status(500).json(err);
+  }
+};
+
+const getSatisfactionFromExperience = async (req, res) => {
+  try {
+    const experience = await Experience.findByPk(req.params.experienceId);
+    if (experience) {
+      if(experience.SatisfactionId === req.params.satisfactionId){
+        const satisfaction = await Satisfaction.findOne({ 
+          where: { id : req.params.satisfactionId }
+        });
+        if(satisfaction)
+        {
+          res.status(200).json(satisfaction);
+        }
+      }
+      res.status(404);
+    } else {
+      return res.status(404).json({
+        error: `Experience with id ${req.params.experienceId} not found !`,
+      });
+    }
+  }catch (err) {
+    res.status(500).json(err);
   }
 };
 
@@ -83,4 +108,5 @@ export {
   updateExperienceById,
   deleteExperience,
   getUserExperciencesByUserId,
+  getSatisfactionFromExperience
 };

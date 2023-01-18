@@ -21,5 +21,9 @@ router.delete(
   "/experiences/:experienceId",
   experiencesController.deleteExperience
 );
+router.get(
+  "/:experienceId/satisfactions/:satisfactionId",
+  experiencesController.getSatisfactionFromExperience
+);
 
 export { router as experienceRouter };
