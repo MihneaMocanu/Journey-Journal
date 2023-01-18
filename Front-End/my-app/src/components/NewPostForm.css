@@ -80,4 +80,18 @@
     outline: none;
   }
 
+  .star-rating img {
+    width: 80px;
+    height: 80px;
+    display: inline-block;
+ }
+
+ .star-rating img.selected {
+  filter: brightness(1);
+}
+
+.star-rating img.deselected {
+  filter: brightness(0.5);
+}
+
   

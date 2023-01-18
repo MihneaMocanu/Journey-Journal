@@ -1,7 +1,7 @@
 import './Experience.css'
 import { useEffect, useState } from "react";
-import slightlySatisfied from '../media/sligthlySatisfied.svg'
-import extremlySatisfied from '../media/extremlySatisfied.svg'
+import slightlySatisfied from '../media/slightlySatisfied.svg'
+import extremelySatisfied from '../media/extremelySatisfied.svg'
 import verySatisfied from '../media/verySatisfied.svg'
 import satisfied from '../media/satisfied.svg'
 import notSatisfied from '../media/notSatisfied.svg'
@@ -16,7 +16,7 @@ function Experience(props){
         let image;
         switch(satisfaction.level) {
             case 'Extremely satisfied':
-                image = extremlySatisfied;
+                image = extremelySatisfied;
                 break;
             case 'Very satisfied':
                 image = verySatisfied;
