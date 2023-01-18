@@ -5,7 +5,7 @@ const sequelize = new Sequelize({
   storage: "./sqlite/transports.db",
 });
 
-sequelize.sync({ force: true }).then(() => {
+sequelize.sync({ force: false }).then(() => {
   console.log("All the models have been synchronized");
 });
 
