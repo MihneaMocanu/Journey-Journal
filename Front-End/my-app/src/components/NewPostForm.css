@@ -1,4 +1,5 @@
 .form-box {
+    background: url("./world-map.jpg") center / cover no-repeat;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -10,6 +11,10 @@
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0px 0px 10px #ccc;
+    position: fixed;
+    top: 15%;
+    max-height: 600px;
+    overflow-y: auto;
 }
 
 .form-content button {
@@ -28,3 +33,51 @@
   .form-content button:hover {
     background-color: #3e8e41;
   }
+
+  input[type="text"] {
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 2px solid gray;
+    font-size: 16px;
+    width: 100%;
+  }
+  
+  input[type="text"]:focus {
+    border-bottom: 2px solid #00b0ff;
+    outline: none;
+  }
+
+  textarea {
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 2px solid gray;
+    font-size: 16px;
+    width: 100%;
+    resize: none;
+  }
+  
+  textarea:focus {
+    border-bottom: 2px solid #00b0ff;
+    outline: none;
+  }
+  
+  input[type="time"] {
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 2px solid gray;
+    font-size: 16px;
+    width: 100%;
+  }
+  
+  input[type="time"]:focus {
+    border-bottom: 2px solid #00b0ff;
+    outline: none;
+  }
+
+  
