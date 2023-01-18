@@ -1,127 +1,116 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import { Link } from "react-router-dom";
 import "./LoginForm.css";
 import { SERVER_URL } from './constants';
 import { ToastContainer, toast } from 'react-toastify';
 import store from "../store/store";
 import 'react-toastify/dist/ReactToastify.css';
-
-const Container = styled.div`
-  position: fixed;
-  top: 25%;
-  left: 35%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 32px;
-`;
-
-const Box = styled.div`
-  width: 100%;
-  max-width: 400px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  padding: 32px;
-`;
-
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const Input = styled.input`
-  margin-bottom: 16px;
-  padding: 8px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  width: 380px;
-`;
-
-const Button = styled.button`
-  margin-top: 16px;
-  padding: 8px;
-  font-size: 16px;
-  color: white;
-  background-color: #333;
-  border: none;
-  border-radius: 4px;
-  width: 100%;
-`;
+import { useNavigate } from 'react-router-dom';
 
 function LoginForm() {
   
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   async function handleSubmit(event) {
     event.preventDefault();
 
-    const res = await fetch(`${SERVER_URL}/users/email/`, {
-      method: "get",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      params: {userEmail: email},
-    });
-
-    if(res.status === 200){ //sucess register
-    
-    }else {
-      if(!(email && email.value)){
-        toast.error("Empty password", {
+    if(email === ''){
+      toast.error("Empty email", {
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: 3000,
+        style: {
+          marginTop: "5rem"
+        }
+      });
+      return;
+    }
+    if(password === ''){
+      toast.error("Empty password", {
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: 3000,
+        style: {
+          marginTop: "5rem"
+        }
+      });
+      return;
+    }
+    const resEmail = await fetch(`${SERVER_URL}/users/email/${email}`);
+    if(resEmail.status === 200){
+      const user = await resEmail.json();
+      if(user.password === password){
+        const action = { type: "logIn", idUser: user.id};
+        store.subscribe(() =>  store.dispatch(action));
+        toast.success("Succesfully logged in!", {
           position: toast.POSITION.TOP_RIGHT,
-          autoClose: 3000
+          autoClose: 3000,
+          style: {
+            marginTop: "5rem",
+            fontSize: "1.2rem"
+          }
+        });
+        setTimeout(() => {
+          navigate('/private');
+        }, 1000);
+      }else{
+        toast.error("Invalid password", {
+          position: toast.POSITION.TOP_RIGHT,
+          autoClose: 3000,
+          style: {
+            marginTop: "5rem"
+          }
         });
       }
-      if(!(password && password.value)){
-        toast.error("Empty password", {
-          position: toast.POSITION.TOP_RIGHT,
-          autoClose: 3000
-        });
-      }
-      else{
-        toast.error("Invalid creditentials", {
-          position: toast.POSITION.TOP_RIGHT,
-          autoClose: 3000
-        });
-      }
+    }else{
+      toast.error("User not found", {
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: 3000,
+        style: {
+          marginTop: "5rem"
+        }
+      });
     }
   }
 
   return (
-    <Container>
-      <Box>
-        <Form onSubmit={handleSubmit}>
+    <div className='container-login'>
+      <div className='box'>
+        <form className ='form'>
           <label>
             Email:
-            <Input
+            <input className='input-login'
               type="text"
+              placeholder="Enter your email" 
               value={email}
               onChange={event => setEmail(event.target.value)}
             />
           </label>
           <label>
             Password:
-            <Input
+            <input className='input-login'
               type="password"
+              placeholder="Enter your password" 
               value={password}
               onChange={event => setPassword(event.target.value)}
             />
           </label>
+          <ToastContainer></ToastContainer>
+          <div className='login'>
+            <Link to="/forgotPassword" className="nav-link">
+              Forgot password?
+            </Link>
+          </div>
+          <button type="submit" className="button" onClick={handleSubmit}>Log in</button>
           <div className='login'>
             <h2>Don't have an account?</h2>
             <Link to="/register" className="nav-link">
               Register
             </Link>
           </div>
-          <ToastContainer></ToastContainer>
-          <Button type="submit">Log in</Button>
-        </Form>
-      </Box>
-    </Container>
+        </form>
+      </div>
+    </div>
   );
 }
 
