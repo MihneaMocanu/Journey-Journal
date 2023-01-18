@@ -4,6 +4,7 @@ import RegisterForm from './components/RegisterForm'
 import NewPostForm from './components/NewPostForm'
 import MainNavBar from "./components/MainNavBar.js";
 import Home from "./components/Home.js"
+import ForgotForm from "./components/ForgotForm.js"
 import "./App.css"
 
 function App () {
@@ -16,6 +17,7 @@ function App () {
           <Route path="/login" element = {<LoginForm />} />
           <Route path="/register" element = {<RegisterForm />}/>
           <Route path="/newPost" element = {<NewPostForm />}/>
+          <Route path="/forgotPassword" element = {<ForgotForm />}/>
         </Routes>
       </main>
       </div>

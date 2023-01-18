@@ -7,10 +7,10 @@ function Home() {
     return (
         <div className='hero'>
             <div className= 'hero-text'>
-                <h2>O mulțime de oameni scriu pe Journey Journal</h2>
-                <h2>Vrei să scrii <span>și tu</span> ?</h2>
-                <Link to="/newPost" className="nav-link">
-                        Postează acum!
+                <h2>A lot of people write on Journey Journal</h2>
+                <h2>Do <span>you </span> wanna join?</h2>
+                <Link to="/login" className="nav-link">
+                        Post now!
                 </Link>
             </div>
             <div className='hero-video'>

@@ -1,54 +1,11 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import { SERVER_URL } from './constants';
 import { useSelector, useDispatch } from "react-redux";
 import { ToastContainer, toast } from 'react-toastify';
 import store from "../store/store";
 import 'react-toastify/dist/ReactToastify.css';
-
-const Container = styled.div`
-  position: fixed;
-  top: 25%;
-  left: 35%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 32px;
-`;
-
-const Box = styled.div`
-  width: 100%;
-  max-width: 400px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  padding: 32px;
-`;
-
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const Input = styled.input`
-  margin-bottom: 16px;
-  padding: 8px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  width: 380px;
-`;
-
-const Button = styled.button`
-  margin-top: 16px;
-  padding: 8px;
-  font-size: 16px;
-  color: white;
-  background-color: #333;
-  border: none;
-  border-radius: 4px;
-  width: 100%;
-`;
+import { useNavigate } from 'react-router-dom';
+import "./RegisterForm.css";
 
 function RegisterForm() {
   //FORM FIELDS
@@ -56,6 +13,7 @@ function RegisterForm() {
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -137,63 +95,74 @@ function RegisterForm() {
     });
     
     if(res.status === 200){ //sucess register
-      const data = await res.json();
-      const id = data.id;
-      const action = { type: "logIn", idUser: id};
-      store.subscribe(() =>  store.dispatch(action));
-      console.log(`New user ID: ${id}`);
-      console.log(user)
+      toast.success("Succesfully registered your account!", {
+        position: toast.POSITION.TOP_RIGHT,
+        autoClose: 1000,
+        style: {
+          marginTop: "5rem"
+        }
+      });
+      setTimeout(() => {
+          navigate('/login');
+      }, 1000);
     }else {
       toast.error("Internal server error", {
         position: toast.POSITION.TOP_RIGHT,
-        autoClose: 3000
+        autoClose: 3000,
+        style: {
+          marginTop: "5rem"
+        }
       });
     }
 }
 
   return (
     
-      <Container>
-        <Box>
-        <Form onSubmit={handleSubmit}>
+      <div className='container-login'>
+        <div className='box'>
+        <form className='form'>
          
           <label>
             First Name:
-            <Input
+            <input className="input-login" 
               type="text"
+              placeholder="Enter your first name" 
               value={firstName}
               onChange={event => setFirstName(event.target.value)}
             />
           </label>
           <label>
             Last Name:
-            <Input
+            <input className="input-login" 
               type="text"
+              placeholder="Enter your last name" 
               value={lastName}
               onChange={event => setLastName(event.target.value)}
             />
           </label>
           <label>
             Email:
-            <Input
+            <input className="input-login" 
               type="email"
+              placeholder="Enter your email" 
               value={email}
               onChange={event => setEmail(event.target.value)}
             />
           </label>
           <label>
             Password:
-            <Input
+            <input className="input-login" 
               type="password"
+              placeholder="Enter your password" 
               value={password}
               onChange={event => setPassword(event.target.value)}
             />
           <ToastContainer></ToastContainer>
           </label>
-          <Button type="submit">Register</Button>
-        </Form>
-      </Box>
-     </Container>
+          <button type="submit" className="button" onClick={handleSubmit}>Register</button>
+        </form>
+      </div>
+     </div>
   );
 }
 

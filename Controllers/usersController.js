@@ -45,7 +45,6 @@ const getUserFromDBByEmail = async (req, res) => {
 
 const insertUserIntoDB = async (req, res) => {
   try {
-    console.log(req.body);
     const newUser = await User.create(req.body);
     return res.status(200).json(newUser);
   } catch (err) {
