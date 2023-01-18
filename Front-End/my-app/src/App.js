@@ -6,6 +6,7 @@ import MainNavBar from "./components/MainNavBar.js";
 import Home from "./components/Home.js"
 import ForgotForm from "./components/ForgotForm.js"
 import "./App.css"
+import ExperienceList from "./components/ExperienceList";
 
 function App () {
     return (
@@ -18,6 +19,7 @@ function App () {
           <Route path="/register" element = {<RegisterForm />}/>
           <Route path="/newPost" element = {<NewPostForm />}/>
           <Route path="/forgotPassword" element = {<ForgotForm />}/>
+          <Route path="/public" element = {<ExperienceList />}/>
         </Routes>
       </main>
       </div>
