@@ -27,11 +27,11 @@ router.get(
 );
 router.get(
   "/:experienceId/agglomeration/:agglomerationId",
-  experiencesController.getSatisfactionFromExperience
+  experiencesController.getAgglomerationFromExperience
 );
 router.get(
   "/:experienceId/transportBy/:transportById",
-  experiencesController.getSatisfactionFromExperience
+  experiencesController.getTransportsByFromExperience
 );
 
 export { router as experienceRouter };

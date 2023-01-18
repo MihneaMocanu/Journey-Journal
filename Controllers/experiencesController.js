@@ -155,4 +155,6 @@ export {
   deleteExperience,
   getUserExperciencesByUserId,
   getSatisfactionFromExperience,
+  getTransportsByFromExperience,
+  getAgglomerationFromExperience,
 };
