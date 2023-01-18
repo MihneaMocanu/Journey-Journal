@@ -1,3 +1,4 @@
+import { Agglomeration } from "../Models/agglomeration.js";
 import { Experience } from "../Models/experience.js";
 import { Satisfaction } from "../Models/satisfaction.js";
 
@@ -40,12 +41,11 @@ const getSatisfactionFromExperience = async (req, res) => {
   try {
     const experience = await Experience.findByPk(req.params.experienceId);
     if (experience) {
-      if(experience.SatisfactionId === req.params.satisfactionId){
-        const satisfaction = await Satisfaction.findOne({ 
-          where: { id : req.params.satisfactionId }
+      if (experience.SatisfactionId === req.params.satisfactionId) {
+        const satisfaction = await Satisfaction.findOne({
+          where: { id: req.params.satisfactionId },
         });
-        if(satisfaction)
-        {
+        if (satisfaction) {
           res.status(200).json(satisfaction);
         }
       }
@@ -55,7 +55,53 @@ const getSatisfactionFromExperience = async (req, res) => {
         error: `Experience with id ${req.params.experienceId} not found !`,
       });
     }
-  }catch (err) {
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
+
+const getAgglomerationFromExperience = async (req, res) => {
+  try {
+    const experience = await Experience.findByPk(req.params.experienceId);
+    if (experience) {
+      if (experience.AgglomerationId === req.params.agglomerationId) {
+        const agglomeration = await Agglomeration.findOne({
+          where: { id: req.params.agglomerationId },
+        });
+        if (agglomeration) {
+          res.status(200).json(agglomeration);
+        }
+      }
+      res.status(404);
+    } else {
+      return res.status(404).json({
+        error: `Experience with id ${req.params.experienceId} not found !`,
+      });
+    }
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
+
+const getTransportsByFromExperience = async (req, res) => {
+  try {
+    const experience = await Experience.findByPk(req.params.experienceId);
+    if (experience) {
+      if (experience.TransportById === req.params.transportById) {
+        const transportBy = await Experience.findOne({
+          where: { id: req.params.transportById },
+        });
+        if (transportBy) {
+          res.status(200).json(transportBy);
+        }
+      }
+      res.status(404);
+    } else {
+      return res.status(404).json({
+        error: `Experience with id ${req.params.experienceId} not found !`,
+      });
+    }
+  } catch (err) {
     res.status(500).json(err);
   }
 };
@@ -108,5 +154,5 @@ export {
   updateExperienceById,
   deleteExperience,
   getUserExperciencesByUserId,
-  getSatisfactionFromExperience
+  getSatisfactionFromExperience,
 };
