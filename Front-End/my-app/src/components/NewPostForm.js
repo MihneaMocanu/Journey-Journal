@@ -144,19 +144,20 @@ function NewPostForm() {
         </label>
         <br />
         <label>
-          Departure Time:
-          <input
-            type="time"
-            value={departureTime}
-            onChange={(e) => setDepartureTime(e.target.value)}
-          />
-        </label>
+                Departure Time:
+                <input
+                    type="datetime-local"
+                    value={departureTime}
+                    onChange={(e) => setDepartureTime(e.target.value)}
+                />
+            </label>
         <br />
         <label>
           Travel Duration:
           <input
             type="text"
             value={duration}
+            placeholder="Travel duration is in minutes."
             onChange={(e) => setDuration(e.target.value)}
           />
         </label>
