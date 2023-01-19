@@ -1,5 +1,5 @@
 import './ExperienceList.css'
-import UserExperience from './Experience';
+import UserExperience from './UserExperience';
 import { useEffect, useState } from "react";
 import { SERVER_URL } from './constants';
 import { useSelector, useDispatch } from "react-redux";

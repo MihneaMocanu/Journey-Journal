@@ -147,6 +147,17 @@ function UserExperience(props){
                                 value={transport.vehicleType}
                             />
                         </div>
+                        <div className='card-row'>
+                            <label className='card-label'>
+                                    Share:
+                            </label>
+                            <input type="checkbox" className='card-checkbox'/>
+                        </div>
+                       
+                        <div className='card-row'>
+                            <button className='card-save'>Save</button>
+                            <button className='card-delete'>Delete</button>
+                        </div>
                     </div>
                 </div>
             </div>
