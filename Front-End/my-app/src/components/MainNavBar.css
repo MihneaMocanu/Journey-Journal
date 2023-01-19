@@ -1,3 +1,5 @@
+@import url('https://use.fontawesome.com/releases/v5.3.1/css/all.css');
+
 body {
   font-family: "Montserrat", sans-serif;
   font-size: 1.6rem;
@@ -59,12 +61,15 @@ nav {
   
 ul {
     list-style: none;
-    width: 50rem;
+    width: 80rem;
     display: flex;
     justify-content: space-between;
 }
   
 .nav-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-size: 2rem;
     font-weight: bold;
     color: #757677;
@@ -74,4 +79,37 @@ ul {
   
 .nav-link:hover {
     border-bottom: 2px solid #757677;
+}
+
+li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-navbar {
+    display: flex;
+    align-items: center;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+.input-navbar {
+    display: flex;
+    flex-grow: 1;
+    padding: 10px;
+    border: none;
+    background-color: transparent;
+    font-size: 2rem;
+}
+
+.button-navbar {
+    display: flex;
+    background-color: #a14a76;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1.2rem;
 }
