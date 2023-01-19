@@ -1,6 +1,7 @@
 import { Agglomeration } from "../Models/agglomeration.js";
 import { Experience } from "../Models/experience.js";
 import { Satisfaction } from "../Models/satisfaction.js";
+import { TransportBy } from "../Models/transportBy.js";
 
 const getAllExperiencesFromDB = async (req, res) => {
   try {
@@ -88,7 +89,7 @@ const getTransportsByFromExperience = async (req, res) => {
     const experience = await Experience.findByPk(req.params.experienceId);
     if (experience) {
       if (experience.TransportById === req.params.transportById) {
-        const transportBy = await Experience.findOne({
+        const transportBy = await TransportBy.findOne({
           where: { id: req.params.transportById },
         });
         if (transportBy) {

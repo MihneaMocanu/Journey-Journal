@@ -1,13 +1,13 @@
 import './Experience.css'
 import { useEffect, useState } from "react";
-import slightlySatisfied from '../media/slightlySatisfied.svg'
-import extremelySatisfied from '../media/extremelySatisfied.svg'
+import slightlySatisfied from '../media/sligthlySatisfied.svg'
+import extremlySatisfied from '../media/extremlySatisfied.svg'
 import verySatisfied from '../media/verySatisfied.svg'
 import satisfied from '../media/satisfied.svg'
 import notSatisfied from '../media/notSatisfied.svg'
 import { SERVER_URL } from './constants';
 
-function Experience(props){
+function UserExperience(props){
     const { item } = props;
     const [user, setUser] = useState({});
     const [satisfaction, setSatisfaction] = useState({});
@@ -16,7 +16,6 @@ function Experience(props){
     const [shared, setShared] = useState(false)
     const [startDate, setStartDate] = useState(new Date())
     const [isLoading, setIsLoading] = useState(true);
-
 
     const getData = async () => {
         try {
@@ -50,11 +49,13 @@ function Experience(props){
         getData();
     },[]);
    
+    
+
     function renderSwitch() {
         let image;
         switch(satisfaction.level) {
             case 'Extremely satisfied':
-                image = extremelySatisfied;
+                image = extremlySatisfied;
                 break;
             case 'Very satisfied':
                 image = verySatisfied;
@@ -71,9 +72,9 @@ function Experience(props){
         }
         return <img src={image} alt="Satisfaction level" className='card-img'/>
     }
-
-    if (isLoading) return <div>Loading...</div>;
     
+    if (isLoading) return <div>Loading...</div>;
+
     return(
         <div>
             { shared ? (
@@ -146,6 +147,17 @@ function Experience(props){
                                 value={transport.vehicleType}
                             />
                         </div>
+                        <div className='card-row'>
+                            <label className='card-label'>
+                                    Share:
+                            </label>
+                            <input type="checkbox" className='card-checkbox'/>
+                        </div>
+                       
+                        <div className='card-row'>
+                            <button className='card-save'>Save</button>
+                            <button className='card-delete'>Delete</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -154,4 +166,4 @@ function Experience(props){
     )
 }
 
-export default Experience;
+export default UserExperience;
