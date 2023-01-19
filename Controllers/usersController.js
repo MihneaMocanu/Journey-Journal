@@ -27,7 +27,6 @@ const getUserFromDBByID = async (req, res) => {
 const getUserFromDBByEmail = async (req, res) => {
   try {
     const userEmail = req.params.userEmail;
-    console.log(userEmail)
     const user = await User.findOne({ //only one email
       where: { email : userEmail }
     });

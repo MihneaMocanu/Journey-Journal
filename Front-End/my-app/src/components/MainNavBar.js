@@ -1,7 +1,10 @@
 import "./MainNavBar.css"
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 
 const MainNavBar = () => {
+    const idUser = useSelector((state) => state.idUser);
+    const isLoggedIn = useSelector((state) => state.isLoggedIn);
     return (
             <header>
                 <div className="container-nav">
@@ -15,19 +18,29 @@ const MainNavBar = () => {
                                     Experiences
                                 </Link>
                             </li>
-                            <Link to="/newPost" className="nav-link">
-                                New Post
-                            </Link>
-                            <li>
-                                <Link to="/private" className="nav-link">
-                                    My Experiences
+                            { isLoggedIn ? (
+                                <>
+                                <Link to="/newPost" className="nav-link">
+                                    New Post
                                 </Link>
-                            </li>
+                                <li>
+                                    <Link to="/private" className="nav-link">
+                                        My Experiences
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link to="/account" className="nav-link">
+                                        Account
+                                    </Link>
+                                </li>
+                                </>
+                            ) : (
                             <li>
                                 <Link to="/login" className="nav-link">
                                     Login
                                 </Link>
                             </li>
+                            )}
                         </ul>
                     </nav>
                 </div>

@@ -6,12 +6,14 @@ import { ToastContainer, toast } from 'react-toastify';
 import store from "../store/store";
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from "react-redux";
 
 function LoginForm() {
   
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -41,7 +43,7 @@ function LoginForm() {
       const user = await resEmail.json();
       if(user.password === password){
         const action = { type: "logIn", idUser: user.id};
-        store.subscribe(() =>  store.dispatch(action));
+        store.dispatch(action);
         toast.success("Succesfully logged in!", {
           position: toast.POSITION.TOP_RIGHT,
           autoClose: 3000,
