@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./NewPostForm.css";
 import { ToastContainer, toast } from 'react-toastify';
 import store from "../store/store";
@@ -10,7 +10,8 @@ import verySatisfied from '../media/verySatisfied.svg'
 import satisfied from '../media/satisfied.svg'
 import notSatisfied from '../media/notSatisfied.svg'
 
-function NewPostForm() {
+function NewPostForm(props) {
+  const { item } = props;
   const [startingPoint, setStartingPoint] = useState("");
   const [endingPoint, setEndingPoint] = useState("");
   const [transportation, setTransportation] = useState("");
@@ -19,6 +20,10 @@ function NewPostForm() {
   const [crowdedness, setCrowdedness] = useState("");
   const [observations, setObservations] = useState("");
   const [satisfaction, setSatisfaction] = useState("");
+  const [agglomeration, setAgglomeration] = useState({});
+  const [transport, setTransport] = useState({});
+  const [user, setUser] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -87,31 +92,58 @@ function NewPostForm() {
     const selectedIcon = e.target;
     const icons = document.querySelectorAll('.star-rating img');
     icons.forEach(icon => {
-        icon.classList.remove("selected");
-        icon.classList.add("deselected");
+      icon.classList.remove("selected");
+      icon.classList.add("deselected");
     });
     selectedIcon.classList.remove("deselected");
     selectedIcon.classList.add("selected");
-    switch(selectedIcon.alt) {
-        case "extremely satisfied":
-            setSatisfaction("extremely satisfied");
-            break;
-        case "very satisfied":
-            setSatisfaction("very satisfied");
-            break;
-        case "satisfied":
-            setSatisfaction("satisfied");
-            break;
-        case "slightly satisfied":
-            setSatisfaction("slightly satisfied");
-            break;
-        case "not satisfied":
-            setSatisfaction("not satisfied");
-            break;
-        default:
-            break;
+    switch (selectedIcon.alt) {
+      case "extremely satisfied":
+        setSatisfaction("extremely satisfied");
+        break;
+      case "very satisfied":
+        setSatisfaction("very satisfied");
+        break;
+      case "satisfied":
+        setSatisfaction("satisfied");
+        break;
+      case "slightly satisfied":
+        setSatisfaction("slightly satisfied");
+        break;
+      case "not satisfied":
+        setSatisfaction("not satisfied");
+        break;
+      default:
+        break;
     }
-}
+  }
+
+  const getData = async () => {
+    try {
+        setIsLoading(true);
+        const resUser = await fetch(`${SERVER_URL}/users/${item.UserId}`);
+        const dataUser = await resUser.json();
+
+        const resAgglomeration = await fetch(`${SERVER_URL}/${item.id}/agglomeration/${item.AgglomerationId}`);
+        const dataAgglomeration = await resAgglomeration.json();
+
+        const resTransport = await fetch(`${SERVER_URL}/${item.id}/transportBy/${item.TransportById}`);
+        const dataTransport = await resTransport.json();
+        
+        setUser(dataUser);
+        setAgglomeration(dataAgglomeration);
+        setTransport(dataTransport);
+
+    }catch (error) {
+        console.log(error);
+    } finally {
+        setIsLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    getData();
+  },[]);
 
   return (
     <div className="form-box">
@@ -144,13 +176,13 @@ function NewPostForm() {
         </label>
         <br />
         <label>
-                Departure Time:
-                <input
-                    type="datetime-local"
-                    value={departureTime}
-                    onChange={(e) => setDepartureTime(e.target.value)}
-                />
-            </label>
+          Departure Time:
+          <input
+            type="datetime-local"
+            value={departureTime}
+            onChange={(e) => setDepartureTime(e.target.value)}
+          />
+        </label>
         <br />
         <label>
           Travel Duration:
