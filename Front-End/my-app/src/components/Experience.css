@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&&display=swap');
+
+.card{
+    margin: 20px;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    min-width: 400px;
+    border-radius: 25px;
+    background-color: #fff;
+}
+.card-image{
+    position: relative;
+    height: 75px;
+    width: 75px;
+    padding: 3px;
+}
+
+.overlay{
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #920eb7;
+    border-radius: 25px 25px 0 25px;
+    z-index: -1;
+    
+}
+
+.card-image .card-img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 30%; /* make the element circular */
+    box-shadow: 10px 10px 0px #920eb7; /* add a shadow with a horizontal and vertical offset of 0px, a blur of 10px and color of #920eb7 */
+    border: 4px solid #920eb7;
+}
+
+.image-content,
+.card-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 14px !important;
+}
+
+.image-content{
+    position: relative;
+    row-gap: 5px;
+    padding: 25px 0px;
+}
+
+
+
+.name{
+    font-size: 18px !important;
+    font-weight: bolder;
+    color: #333;
+}
+
+.description{
+    font-size: 14px !important;
+    font-weight: 300 !important;
+    color: #707070;
+    text-align: center !important;
+}

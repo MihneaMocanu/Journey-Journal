@@ -16,13 +16,16 @@ function ExperienceList(props){
     }, []);
     
     return(
-        <div className='experience-list'>
-            <div className='slide-container'>
-                <div className='slide-content'>
+        <div className='main-experiences'>
+            <div className='experience-container'>
+                <div className='experience-list'>
                     <div className='card-wrapper'>
-                        {experiences.map((e) => (
-                            <Experience key = {e.id} item = {e} />
-                        ))}
+                        {experiences.map(e => ( <Experience key = {e.id} item = {e} /> ))}
+                        {experiences.map(e => ( <Experience key = {e.id} item = {e} /> ))}
+                        {experiences.map(e => ( <Experience key = {e.id} item = {e} /> ))}
+                        {experiences.map(e => ( <Experience key = {e.id} item = {e} /> ))}
+                        {experiences.map(e => ( <Experience key = {e.id} item = {e} /> ))}
+                        {experiences.map(e => ( <Experience key = {e.id} item = {e} /> ))}
                     </div>
                 </div>
             </div>

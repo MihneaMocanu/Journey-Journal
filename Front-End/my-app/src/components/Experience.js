@@ -9,10 +9,17 @@ import { SERVER_URL } from './constants';
 
 function Experience(props){
     const { item } = props;
-    console.log(props);
-    async function renderSwitch(experience) {
-        const res = await fetch(`${SERVER_URL}/${experience.id}/satisfactions/${experience.SatisfactionId}`);
-        const satisfaction = await res.json();
+    const [satisfaction, setSatisfaction] = useState({});
+
+    const getSatisfaction = async () => {
+        const response = await fetch(`${SERVER_URL}/${item.id}/satisfactions/${item.SatisfactionId}`);
+        const data = await response.json();
+        setSatisfaction(data);
+    };
+
+    getSatisfaction();
+
+    function renderSwitch() {
         let image;
         switch(satisfaction.level) {
             case 'Extremely satisfied':
@@ -31,18 +38,41 @@ function Experience(props){
                 image = notSatisfied;
                 break;
         }
-        return `<image src=${image}></image>`
+        return <img src={image} alt="Satisfaction level" className='card-img'/>
     }
     
     return(
-        <div className='card'>
-            <div className='image-content'>
-                <span className='overlay'></span>
-                <div className='card-image'>
-                    
+
+            <div className='card'>
+                <div className='image-content'>
+                    <span className='overlay'></span>
+                    <div className='card-image'>
+                        { renderSwitch() }
+                    </div>
+                    <div className='card-content'>
+                        <h2 className='name'>Chris Neagu</h2>
+                        <p className='description'>lorem ipsum</p>
+                        <label className='label-description'>
+                            Departure: Vienna
+                        </label>
+                        <label className='label-description'>
+                            Arrival: Bucharest
+                        </label>
+                        <label className='label-description'>
+                            Data: "DD-MM-YYYY"
+                        </label>
+                        <label className='label-description'>
+                            Duration: Minutes
+                        </label>
+                        <label className='label-description'>
+                            Transport: Airplane
+                        </label>
+                        <label className='label-description'>
+                            Traffic: Very Busy
+                        </label>
+                    </div>
                 </div>
             </div>
-        </div>
     )
 }
 
