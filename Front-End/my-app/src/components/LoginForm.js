@@ -105,7 +105,7 @@ function LoginForm() {
           </div>
           <button type="submit" className="button" onClick={handleSubmit}>Log in</button>
           <div className='login'>
-            <h2>Don't have an account?</h2>
+            <h2>Don't have an account?&nbsp;</h2>
             <Link to="/register" className="nav-link">
               Register
             </Link>
