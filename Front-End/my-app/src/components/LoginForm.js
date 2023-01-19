@@ -53,7 +53,7 @@ function LoginForm() {
           }
         });
         setTimeout(() => {
-          navigate('/private');
+          navigate('/');
         }, 1000);
       }else{
         toast.error("Invalid password", {

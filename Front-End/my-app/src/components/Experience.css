@@ -64,3 +64,32 @@
     color: #707070;
     text-align: center !important;
 }
+
+
+.card-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+}
+
+.card-row label {
+    display: flex;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.3rem!important;
+    font-weight: bold;
+    align-items: center;
+}
+
+.card-row input {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.6rem !important;
+    margin-left: 10px !important;
+    margin-bottom: 16px !important;
+    padding: 8px !important;
+    font-size: 16px !important;
+    border: 1px solid #ccc !important;
+    border-radius: 4px !important;
+    width: 190px !important;
+    text-align: center !important;
+}

@@ -7,7 +7,7 @@ import satisfied from '../media/satisfied.svg'
 import notSatisfied from '../media/notSatisfied.svg'
 import { SERVER_URL } from './constants';
 
-function Experience(props){
+function UserExperience(props){
     const { item } = props;
     const [user, setUser] = useState({});
     const [satisfaction, setSatisfaction] = useState({});
@@ -16,7 +16,6 @@ function Experience(props){
     const [shared, setShared] = useState(false)
     const [startDate, setStartDate] = useState(new Date())
     const [isLoading, setIsLoading] = useState(true);
-
 
     const getData = async () => {
         try {
@@ -50,6 +49,8 @@ function Experience(props){
         getData();
     },[]);
    
+    
+
     function renderSwitch() {
         let image;
         switch(satisfaction.level) {
@@ -71,9 +72,9 @@ function Experience(props){
         }
         return <img src={image} alt="Satisfaction level" className='card-img'/>
     }
-
-    if (isLoading) return <div>Loading...</div>;
     
+    if (isLoading) return <div>Loading...</div>;
+
     return(
         <div>
             { shared ? (
@@ -154,4 +155,4 @@ function Experience(props){
     )
 }
 
-export default Experience;
+export default UserExperience;
