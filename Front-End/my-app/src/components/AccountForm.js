@@ -3,7 +3,7 @@ import { SERVER_URL } from "./constants";
 import { useSelector, useDispatch } from "react-redux";
 import store from "../store/store";
 import { useNavigate } from "react-router-dom";
-import accountSettings from "../media/accountSettings.jpg";
+import accountSettings from "../media/accountSettings.png";
 import "./AccountForm.css";
 
 function AccountForm() {
