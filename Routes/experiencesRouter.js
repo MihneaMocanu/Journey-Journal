@@ -49,5 +49,9 @@ router.get(
   "/experiences/word/:cuvant",
   experiencesController.getExperiencesByWord
 );
+router.delete(
+  "/experiences/delete/:userId",
+  experiencesController.deleteExperiencesByUserId
+);
 
 export { router as experienceRouter };

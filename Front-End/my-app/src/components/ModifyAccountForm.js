@@ -3,6 +3,7 @@ import { SERVER_URL } from "./constants";
 import { useSelector, useDispatch } from "react-redux";
 import store from "../store/store";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 
 const ModifyAccountForm = () => {
   const [firstName, setFirstName] = useState("");
@@ -27,22 +28,19 @@ const ModifyAccountForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (user) {
-      if (firstName !== null || firstName.length !== 0) {
-        user.firstName = firstName;
-      } else {
-        setFirstName(firstName);
-      }
-
-      if (firstName !== null || lastName.length !== 0) {
-        user.lastName = lastName;
-      } else {
-        setLastName(lastName);
-      }
-
-      if (email !== null || email.length !== 0) {
-        user.email = email;
-      } else {
+      if (user.firstName !== "" && user.lastName !== "" && user.email !== "") {
+        setFirstName(user.firstName);
+        setLastName(user.lastName);
         setEmail(user.email);
+      } else {
+        toast.error("Empty fields !", {
+          position: toast.POSITION.TOP_RIGHT,
+          autoClose: 2000,
+          style: {
+            marginTop: "5rem",
+          },
+        });
+        return;
       }
 
       const res = await fetch(`${SERVER_URL}/users/${user.id}`, {
@@ -58,38 +56,41 @@ const ModifyAccountForm = () => {
   };
 
   return (
-    <form className="form-content">
-      <label>
-        First Name:
-        <input
-          type="text"
-          value={firstName}
-          onChange={(e) => setFirstName(e.target.value)}
-        />
-      </label>
+    <div>
+      <form className="form-content">
+        <label>
+          First Name:
+          <input
+            type="text"
+            value={user.firstName}
+            onChange={(e) => setFirstName((user.firstName = e.target.value))}
+          />
+        </label>
 
-      <label>
-        Last Name:
-        <input
-          type="text"
-          value={lastName}
-          onChange={(e) => setLastName(e.target.value)}
-        />
-      </label>
+        <label>
+          Last Name:
+          <input
+            type="text"
+            value={user.lastName}
+            onChange={(e) => setLastName((user.lastName = e.target.value))}
+          />
+        </label>
 
-      <label>
-        Email:
-        <input
-          type="text"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </label>
+        <label>
+          Email:
+          <input
+            type="text"
+            value={user.email}
+            onChange={(e) => setEmail((user.email = e.target.value))}
+          />
+        </label>
 
-      <button type="submit" onClick={handleSubmit}>
-        Save
-      </button>
-    </form>
+        <button type="submit" onClick={handleSubmit}>
+          Save
+        </button>
+      </form>
+      <ToastContainer></ToastContainer>
+    </div>
   );
 };
 
