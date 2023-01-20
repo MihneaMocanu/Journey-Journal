@@ -23,6 +23,7 @@ function App() {
           <Route path="/newPost" element={<NewPostForm />} />
           <Route path="/forgotPassword" element={<ForgotForm />} />
           <Route path="/public" element={<ExperienceList />} />
+          <Route path="/public/:word" element={<ExperienceList />}></Route>
           <Route path="/private" element={<UserExperienceList />} />
           <Route path="/account" element={<AccountForm />} />
           <Route path="/modifyAccount" element={<ModifyAccountForm />} />
