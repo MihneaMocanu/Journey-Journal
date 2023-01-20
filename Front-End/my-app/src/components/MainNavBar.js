@@ -1,19 +1,18 @@
 import "./MainNavBar.css";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const MainNavBar = () => {
   const idUser = useSelector((state) => state.idUser);
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
-  const [word, setWord] = useState('');
+  const [word, setWord] = useState("");
   const navigate = useNavigate();
 
   function handleSubmit(event) {
     event.preventDefault();
-    if(word){
+    if (word) {
       navigate(`/public/${word}`);
       window.location.reload(false);
     }
@@ -41,14 +40,18 @@ const MainNavBar = () => {
                   className="input-navbar"
                   placeholder="Search..."
                   value={word}
-                  onChange={event => setWord(event.target.value)}
+                  onChange={(event) => setWord(event.target.value)}
                 />
-                <button type="submit" className="button-navbar" onClick={handleSubmit}>
+                <button
+                  type="submit"
+                  className="button-navbar"
+                  onClick={handleSubmit}
+                >
                   Search
                 </button>
               </form>
             </li>
-            {isLoggedIn ? (
+            {isLoggedIn === true && idUser !== -1 ? (
               <>
                 <Link to="/newPost" className="nav-link">
                   New Post

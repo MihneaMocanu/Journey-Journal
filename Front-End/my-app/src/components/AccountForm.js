@@ -27,10 +27,6 @@ function AccountForm() {
   async function handleSubmit() {
     const res = await fetch(`${SERVER_URL}/users/${user.id}`, {
       method: "DELETE",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
     });
 
     const action = { type: "logOut" };

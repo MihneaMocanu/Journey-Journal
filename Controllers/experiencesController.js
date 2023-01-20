@@ -2,6 +2,7 @@ import { Agglomeration } from "../Models/agglomeration.js";
 import { Experience } from "../Models/experience.js";
 import { Satisfaction } from "../Models/satisfaction.js";
 import { TransportBy } from "../Models/transportBy.js";
+import { User } from "../Models/user.js";
 
 const getAllExperiencesFromDB = async (req, res) => {
   try {
@@ -278,6 +279,33 @@ const deleteExperience = async (req, res) => {
   }
 };
 
+const deleteExperiencesByUserId = async (req, res) => {
+  try {
+    const user = await User.findOne({
+      where: { id: req.params.userId },
+    });
+    if (user) {
+      const experiences = await Experience.findAll({
+        where: { UserId: user.id },
+      });
+
+      if (experiences) {
+        for (let i = 0; i < experiences.length; i++) {
+          let deletedExperience = await Experience.findByPk(experiences[i].id);
+          await deletedExperience.destroy();
+        }
+      }
+      res.status(404);
+    } else {
+      return res.status(404).json({
+        error: `Experience with user: ${req.params.userId} not found !`,
+      });
+    }
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
+
 export {
   getAllExperiencesFromDB,
   getExperienceFromDBById,
@@ -292,4 +320,5 @@ export {
   getExperiencesBySatisfactionWord,
   getExperiencesByAgglomerationWord,
   getExperiencesByWord,
+  deleteExperiencesByUserId,
 };
