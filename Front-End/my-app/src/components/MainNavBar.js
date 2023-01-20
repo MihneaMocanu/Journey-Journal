@@ -14,7 +14,6 @@ const MainNavBar = () => {
     event.preventDefault();
     if (word) {
       navigate(`/public/${word}`);
-      window.location.reload(false);
     }
   }
 
