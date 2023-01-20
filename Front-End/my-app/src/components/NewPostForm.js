@@ -9,6 +9,8 @@ import extremelySatisfied from '../media/extremelySatisfied.svg'
 import verySatisfied from '../media/verySatisfied.svg'
 import satisfied from '../media/satisfied.svg'
 import notSatisfied from '../media/notSatisfied.svg'
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from 'react-router-dom';
 
 function NewPostForm(props) {
   const { item } = props;
@@ -24,6 +26,71 @@ function NewPostForm(props) {
   const [transport, setTransport] = useState({});
   const [user, setUser] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const [shared, setShared] = useState(false)
+  const idUser = useSelector((state) => state.idUser);
+  const navigate = useNavigate();
+
+  const [vehicleId, setVehicleId] = useState('');
+  const [agglomerationId, setAgglomerationId] = useState('')
+  const [satisfactionId, setSatisfactionId] = useState('')
+
+  const [vehicleOption, setVehicleOption] = useState('')
+  const [trafficOption, setTrafficOption] = useState('')
+
+  const [agglomerationArray, setAgglomerationArray] = useState([])
+  const [vehicleArray, setVehicleArray] = useState([])
+  const [satisfactionArray, setSatisfactionArray] = useState([])
+
+  const getData = async () => {
+    try {
+        setIsLoading(true);
+        const resUser = await fetch(`${SERVER_URL}/users/${idUser}`);
+        const dataUser = await resUser.json();
+
+        const resAgglomerationArray = await fetch(`${SERVER_URL}/agglomerations`);
+        const dataAgglomerationArray = await resAgglomerationArray.json();
+
+        const resVehicleArray = await fetch(`${SERVER_URL}/transportsBy`);
+        const dataVehicleArray = await resVehicleArray.json();
+
+        const resSatisfactionArray = await fetch(`${SERVER_URL}/satisfactions`);
+        const dataSatisfactionArray = await resSatisfactionArray.json();
+
+        setVehicleArray(dataVehicleArray)
+        setAgglomerationArray(dataAgglomerationArray)
+        setSatisfactionArray(dataSatisfactionArray)
+        setUser(dataUser);
+        setVehicleId(dataVehicleArray[0].id)
+        setAgglomerationId(dataAgglomerationArray[0].id)
+        setSatisfactionId(dataSatisfactionArray[0].id)
+        setVehicleOption(dataVehicleArray[0].vehicleType)
+        setAgglomeration(dataAgglomerationArray[0].description)
+        
+    }catch (error) {
+        console.log(error);
+    } finally {
+        setIsLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    getData();
+  },[]);
+
+  function handleAgllomeration(event){
+      setTrafficOption(event.target.value)
+      setAgglomerationId(agglomerationArray[event.target.selectedIndex].id) 
+  }
+
+  function handleVehicle(event){
+      setVehicleOption(event.target.value)
+      setVehicleId(vehicleArray[event.target.selectedIndex].id)
+  }
+
+  function handleSatisfaction(event){
+      setSatisfactionOption(event.target.value)
+      item.SatisfactionId = satisfactionArray[event.target.selectedIndex].id
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -39,22 +106,24 @@ function NewPostForm(props) {
       });
       return;
     }
-
+    
     // creaza obiectul de post
-    const post = {
-      startingPoint,
-      endingPoint,
-      transportation,
-      departureTime,
-      duration,
-      crowdedness,
-      observations,
-      satisfaction,
-      authorId: state.idUser,
-    };
 
+    const post = Object.assign({
+      start_adress: startingPoint,
+      end_adress: endingPoint,
+      start_date: departureTime,
+      observation: observations,
+      duration_minutes: duration,
+      share: shared,
+      UserId: idUser,
+      SatisfactionId: satisfactionId,
+      TransportById: vehicleId,
+      AgglomerationId: agglomerationId,
+    });
+    console.log(JSON.stringify(post))
     try {
-      const res = await fetch(`${SERVER_URL}/newPost`, {
+      const res = await fetch(`${SERVER_URL}/newExperience`, {
         method: "post",
         headers: {
           "Content-Type": "application/json",
@@ -63,10 +132,16 @@ function NewPostForm(props) {
       });
 
       if (res.status === 200) {
-        const data = await res.json();
-        const postId = data.id;
-        console.log(`New post ID: ${postId}`);
-        console.log(post);
+        toast.done("Post created", {
+          position: toast.POSITION.TOP_RIGHT,
+          autoClose: 1000,
+          style: {
+            marginTop: "5rem"
+          }
+        });
+        setTimeout(() => {
+          navigate('/newPost');
+        }, 2000);
       } else {
         toast.error("Error creating post", {
           position: toast.POSITION.TOP_RIGHT,
@@ -97,53 +172,32 @@ function NewPostForm(props) {
     });
     selectedIcon.classList.remove("deselected");
     selectedIcon.classList.add("selected");
-    switch (selectedIcon.alt) {
-      case "extremely satisfied":
-        setSatisfaction("extremely satisfied");
+    const key = e.target.dataset.key;
+    setSatisfactionId(key)
+  }
+
+ 
+  function renderSwitch(satisfactionLevel, satisfactionId) {
+    let image;
+    switch (satisfactionLevel) {
+      case 'Extremely satisfied':
+        image = extremelySatisfied;
         break;
-      case "very satisfied":
-        setSatisfaction("very satisfied");
+      case 'Very satisfied':
+        image = verySatisfied;
         break;
-      case "satisfied":
-        setSatisfaction("satisfied");
+      case 'Satisfied':
+        image = satisfied;
         break;
-      case "slightly satisfied":
-        setSatisfaction("slightly satisfied");
-        break;
-      case "not satisfied":
-        setSatisfaction("not satisfied");
+      case 'Slightly satisfied':
+        image = slightlySatisfied;
         break;
       default:
+        image = notSatisfied;
         break;
     }
+    return <img src={image} alt="Satisfaction level" key = {satisfactionId} data-key= {satisfactionId} onClick={handleClick} />
   }
-
-  const getData = async () => {
-    try {
-        setIsLoading(true);
-        const resUser = await fetch(`${SERVER_URL}/users/${item.UserId}`);
-        const dataUser = await resUser.json();
-
-        const resAgglomeration = await fetch(`${SERVER_URL}/${item.id}/agglomeration/${item.AgglomerationId}`);
-        const dataAgglomeration = await resAgglomeration.json();
-
-        const resTransport = await fetch(`${SERVER_URL}/${item.id}/transportBy/${item.TransportById}`);
-        const dataTransport = await resTransport.json();
-        
-        setUser(dataUser);
-        setAgglomeration(dataAgglomeration);
-        setTransport(dataTransport);
-
-    }catch (error) {
-        console.log(error);
-    } finally {
-        setIsLoading(false);
-    }
-  }
-
-  useEffect(() => {
-    getData();
-  },[]);
 
   return (
     <div className="form-box">
@@ -168,12 +222,12 @@ function NewPostForm(props) {
         <br />
         <label>
           Method of transportation:
-          <input
-            type="text"
-            value={transportation}
-            onChange={(e) => setTransportation(e.target.value)}
-          />
         </label>
+        <div>
+          <select className='dropdown' value={vehicleOption} onChange={handleVehicle}>
+            {vehicleArray.map((v) => (<option key={v.id} value={v.vehicleType}>{v.vehicleType}</option>))}
+          </select>
+        </div>
         <br />
         <label>
           Departure Time:
@@ -196,12 +250,12 @@ function NewPostForm(props) {
         <br />
         <label>
           Crowdedness:
-          <input
-            type="text"
-            value={crowdedness}
-            onChange={(e) => setCrowdedness(e.target.value)}
-          />
         </label>
+        <div>
+          <select className='dropdown' value={trafficOption} onChange={handleAgllomeration}>
+            {agglomerationArray.map((a) => (<option key={a.id} value={a.description}>{a.description}</option>))}
+          </select>
+        </div>
         <br />
         <label>
           Observations:
@@ -214,14 +268,19 @@ function NewPostForm(props) {
         <label>
           Satisfaction:
           <div className="star-rating">
-            <img src={extremelySatisfied} alt="extremely satisfied" onClick={handleClick} />
-            <img src={verySatisfied} alt="very satisfied" onClick={handleClick} />
-            <img src={satisfied} alt="satisfied" onClick={handleClick} />
-            <img src={slightlySatisfied} alt="slightly satisfied" onClick={handleClick} />
-            <img src={notSatisfied} alt="not satisfied" onClick={handleClick} />
+            {satisfactionArray.map((s) => ( renderSwitch(s.level, s.id) ))}
           </div>
         </label>
         <br />
+        <label>
+          Share:
+        </label>
+        <input
+          type="checkbox"
+          className='card-checkbox'
+          checked={shared}
+          onChange={() => setShared(!shared)}
+        />
         <button type="submit">Post</button>
       </form>
       <ToastContainer></ToastContainer>

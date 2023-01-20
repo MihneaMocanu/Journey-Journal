@@ -101,3 +101,23 @@
     margin-top: 16px !important;
 }
 
+.card-save {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    background-color: green;
+    color: black;
+    height: 32px;
+    width: 64px;
+    margin-left: 5px;
+    text-align: center;
+}
+
+.card-delete {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    background-color: red;
+    color: black;
+    height: 32px;
+    width: 64px;
+    text-align: center;
+}

@@ -107,6 +107,118 @@ const getTransportsByFromExperience = async (req, res) => {
   }
 };
 
+const getExperiencesByTransportWord = async (req, res) => {
+  try {
+    const transportBy = await TransportBy.findOne({
+      where: { vehicleType: req.params.vehicleType },
+    });
+    if (transportBy) {
+      const experiences = await Experience.findAll({
+        where: { TransportById: transportBy.id },
+      });
+      if (experiences) {
+        res.status(200).json(experiences);
+      }
+      res.status(404);
+    } else {
+      return res.status(404).json({
+        error: `Experience with vehicleType: ${req.params.vehicleType} not found !`,
+      });
+    }
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
+
+const getExperiencesBySatisfactionWord = async (req, res) => {
+  try {
+    const satisfaction = await Satisfaction.findOne({
+      where: { level: req.params.level },
+    });
+    if (satisfaction) {
+      const experiences = await Experience.findAll({
+        where: { SatisfactionId: satisfaction.id },
+      });
+      if (experiences) {
+        res.status(200).json(experiences);
+      }
+      res.status(404);
+    } else {
+      return res.status(404).json({
+        error: `Experience with satisfaction: ${req.params.satisfaction} not found !`,
+      });
+    }
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
+
+const getExperiencesByAgglomerationWord = async (req, res) => {
+  try {
+    const agglomeration = await Agglomeration.findOne({
+      where: { description: req.params.description },
+    });
+    if (agglomeration) {
+      const experiences = await Experience.findAll({
+        where: { AgglomerationId: agglomeration.id },
+      });
+      if (experiences) {
+        res.status(200).json(experiences);
+      }
+      res.status(404);
+    } else {
+      return res.status(404).json({
+        error: `Experience with agglomeration: ${req.params.description} not found !`,
+      });
+    }
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
+
+const getExperiencesByWord = async (req, res) => {
+  try {
+    const agglomeration = await Agglomeration.findOne({
+      where: { description: req.params.cuvant },
+    });
+    const satisfaction = await Satisfaction.findOne({
+      where: { level: req.params.cuvant },
+    });
+    const transportBy = await TransportBy.findOne({
+      where: { vehicleType: req.params.cuvant },
+    });
+    if (agglomeration || satisfaction || transportBy) {
+      let experiences;
+      if (agglomeration) {
+        experiences = await Experience.findAll({
+          where: { AgglomerationId: agglomeration.id },
+        });
+      }
+      if (satisfaction) {
+        experiences = await Experience.findAll({
+          where: { SatisfactionId: satisfaction.id },
+        });
+      }
+      if (transportBy) {
+        experiences = await Experience.findAll({
+          where: { TransportById: transportBy.id },
+        });
+      }
+
+      if (experiences) {
+        res.status(200).json(experiences);
+      }
+      res.status(404);
+    } else {
+      return res.status(404).json({
+        error: `Experience with: ${req.params.cuvant} not found !`,
+      });
+    }
+  } catch (err) {
+    res.status(500).json(err.message);
+  }
+};
+
 const insertExperienceIntoDB = async (req, res) => {
   try {
     const experience = await Experience.create(req.body);
@@ -158,4 +270,8 @@ export {
   getSatisfactionFromExperience,
   getTransportsByFromExperience,
   getAgglomerationFromExperience,
+  getExperiencesByTransportWord,
+  getExperiencesBySatisfactionWord,
+  getExperiencesByAgglomerationWord,
+  getExperiencesByWord,
 };

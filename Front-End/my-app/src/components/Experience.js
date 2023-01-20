@@ -13,8 +13,8 @@ function Experience(props){
     const [satisfaction, setSatisfaction] = useState({});
     const [agglomeration, setAgglomeration] = useState({});
     const [transport, setTransport] = useState({});
-    const [shared, setShared] = useState(false)
-    const [startDate, setStartDate] = useState(new Date())
+    const [shared, setShared] = useState(false);
+    const [startDate, setStartDate] = useState(new Date());
     const [isLoading, setIsLoading] = useState(true);
 
 
@@ -39,6 +39,7 @@ function Experience(props){
             setTransport(dataTransport);
             setShared(item.share)
             setStartDate(new Date(item.start_date));
+        
         }catch (error) {
             console.log(error);
         } finally {
@@ -85,7 +86,12 @@ function Experience(props){
                     </div>
                     <div className='card-content'>
                         <h2 className='name'>{user.firstName}</h2>
-                        <p className='description'>{item.observation}</p>
+                        <textarea 
+                            className='description'
+                            defaultValue={item.observation}
+                            readOnly
+                            rows={4} cols={40} 
+                        />
                         <div className='card-row'>
                             <label className='card-label'>
                                 Departure:
@@ -111,9 +117,9 @@ function Experience(props){
                                 Date:
                             </label>
                             <input className='card-input'
-                                type="date"
+                                type="text"
                                 readOnly
-                                value={startDate.toISOString().substring(0,10)}
+                                value={startDate.toLocaleString().substring(0,17)}
                             />
                         </div>
                         <div className='card-row'>
