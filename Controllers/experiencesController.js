@@ -288,12 +288,15 @@ const deleteExperiencesByUserId = async (req, res) => {
       const experiences = await Experience.findAll({
         where: { UserId: user.id },
       });
-
+      console.log(experiences)
       if (experiences) {
         for (let i = 0; i < experiences.length; i++) {
           let deletedExperience = await Experience.findByPk(experiences[i].id);
-          await deletedExperience.destroy();
+          if(deleteExperience){
+            await deletedExperience.destroy();
+          }
         }
+        res.status(200).json({message: 'destroyed'})
       }
       res.status(404);
     } else {
