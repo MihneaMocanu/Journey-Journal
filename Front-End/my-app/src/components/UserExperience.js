@@ -176,7 +176,8 @@ function UserExperience(props) {
         },
       });
     }
-    navigate("/public");
+    navigate("/private");
+    window.location.reload(false);
   }
   if (isLoading) return <div>Loading...</div>;
   if (!item.id) return;
