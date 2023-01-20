@@ -33,5 +33,21 @@ router.get(
   "/:experienceId/transportBy/:transportById",
   experiencesController.getTransportsByFromExperience
 );
+router.get(
+  "/experiences/wordTransport/:vehicleType",
+  experiencesController.getExperiencesByTransportWord
+);
+router.get(
+  "/experiences/wordSatisfaction/:level",
+  experiencesController.getExperiencesBySatisfactionWord
+);
+router.get(
+  "/experiences/wordAgglomeration/:description",
+  experiencesController.getExperiencesByAgglomerationWord
+);
+router.get(
+  "/experiences/word/:cuvant",
+  experiencesController.getExperiencesByWord
+);
 
 export { router as experienceRouter };
