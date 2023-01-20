@@ -25,6 +25,11 @@ function AccountForm() {
   }, []);
 
   async function handleSubmit() {
+
+    const resExp = await fetch(`${SERVER_URL}/experiences/delete/${user.id}`, {
+      method: "DELETE",
+    });
+
     const res = await fetch(`${SERVER_URL}/users/${user.id}`, {
       method: "DELETE",
     });
