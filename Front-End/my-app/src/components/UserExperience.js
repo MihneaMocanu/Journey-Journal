@@ -56,13 +56,14 @@ function UserExperience(props){
             const resSatisfactionArray = await fetch(`${SERVER_URL}/satisfactions`);
             const dataSatisfactionArray = await resSatisfactionArray.json();
 
-            
             setUser(dataUser);
             setSatisfaction(dataSatisfaction);
             setAgglomeration(dataAgglomeration);
             setTransport(dataTransport);
             setShared(item.share)
-            setStartDate(new Date(item.start_date).toISOString().substring(0,10));
+            const date = new Date(item.start_date).toISOString();
+            const formattedDate = date.substring(0, 10) + 'T' + date.substring(11, 16);
+            setStartDate(formattedDate);
             setDeparture(item.start_adress);
             setArrival(item.end_adress);
             setDuration(item.duration_minutes)
@@ -214,7 +215,7 @@ function UserExperience(props){
                                 Date:
                             </label>
                             <input className='card-input'
-                                type="date"
+                                type="datetime-local"
                                 value={
                                     startDate
                                 }

@@ -117,9 +117,9 @@ function Experience(props){
                                 Date:
                             </label>
                             <input className='card-input'
-                                type="date"
+                                type="text"
                                 readOnly
-                                value={startDate.toISOString().substring(0,10)}
+                                value={startDate.toLocaleString().substring(0,17)}
                             />
                         </div>
                         <div className='card-row'>
