@@ -13,8 +13,8 @@ const MainNavBar = () => {
   function handleSubmit(event) {
     event.preventDefault();
     if (word) {
-      navigate(`/public/${word}`);
       window.location.reload(false);
+      navigate(`/public/${word}`);
     }
   }
 
