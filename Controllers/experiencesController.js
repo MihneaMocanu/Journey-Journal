@@ -187,8 +187,26 @@ const getExperiencesByWord = async (req, res) => {
     const transportBy = await TransportBy.findOne({
       where: { vehicleType: req.params.cuvant },
     });
-    if (agglomeration || satisfaction || transportBy) {
+    const experience1 = await Experience.findAll({
+      where: { start_adress: req.params.cuvant },
+    });
+    const experience2 = await Experience.findAll({
+      where: { end_adress: req.params.cuvant },
+    });
+    if (
+      agglomeration ||
+      satisfaction ||
+      transportBy ||
+      experience1 ||
+      experience2
+    ) {
       let experiences;
+      if (experience1) {
+        experiences = experience1;
+      }
+      if (experience2) {
+        experiences = experience2;
+      }
       if (agglomeration) {
         experiences = await Experience.findAll({
           where: { AgglomerationId: agglomeration.id },

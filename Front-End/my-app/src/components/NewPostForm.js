@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import "./NewPostForm.css";
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast } from "react-toastify";
 import store from "../store/store";
-import 'react-toastify/dist/ReactToastify.css';
-import { SERVER_URL } from './constants';
-import slightlySatisfied from '../media/slightlySatisfied.svg'
-import extremelySatisfied from '../media/extremelySatisfied.svg'
-import verySatisfied from '../media/verySatisfied.svg'
-import satisfied from '../media/satisfied.svg'
-import notSatisfied from '../media/notSatisfied.svg'
+import "react-toastify/dist/ReactToastify.css";
+import { SERVER_URL } from "./constants";
+import slightlySatisfied from "../media/slightlySatisfied.svg";
+import extremelySatisfied from "../media/extremelySatisfied.svg";
+import verySatisfied from "../media/verySatisfied.svg";
+import satisfied from "../media/satisfied.svg";
+import notSatisfied from "../media/notSatisfied.svg";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 function NewPostForm(props) {
   const { item } = props;
@@ -26,70 +26,69 @@ function NewPostForm(props) {
   const [transport, setTransport] = useState({});
   const [user, setUser] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  const [shared, setShared] = useState(false)
+  const [shared, setShared] = useState(false);
   const idUser = useSelector((state) => state.idUser);
   const navigate = useNavigate();
 
-  const [vehicleId, setVehicleId] = useState('');
-  const [agglomerationId, setAgglomerationId] = useState('')
-  const [satisfactionId, setSatisfactionId] = useState('')
+  const [vehicleId, setVehicleId] = useState("");
+  const [agglomerationId, setAgglomerationId] = useState("");
+  const [satisfactionId, setSatisfactionId] = useState("");
 
-  const [vehicleOption, setVehicleOption] = useState('')
-  const [trafficOption, setTrafficOption] = useState('')
+  const [vehicleOption, setVehicleOption] = useState("");
+  const [trafficOption, setTrafficOption] = useState("");
 
-  const [agglomerationArray, setAgglomerationArray] = useState([])
-  const [vehicleArray, setVehicleArray] = useState([])
-  const [satisfactionArray, setSatisfactionArray] = useState([])
+  const [agglomerationArray, setAgglomerationArray] = useState([]);
+  const [vehicleArray, setVehicleArray] = useState([]);
+  const [satisfactionArray, setSatisfactionArray] = useState([]);
 
   const getData = async () => {
     try {
-        setIsLoading(true);
-        const resUser = await fetch(`${SERVER_URL}/users/${idUser}`);
-        const dataUser = await resUser.json();
+      setIsLoading(true);
+      const resUser = await fetch(`${SERVER_URL}/users/${idUser}`);
+      const dataUser = await resUser.json();
 
-        const resAgglomerationArray = await fetch(`${SERVER_URL}/agglomerations`);
-        const dataAgglomerationArray = await resAgglomerationArray.json();
+      const resAgglomerationArray = await fetch(`${SERVER_URL}/agglomerations`);
+      const dataAgglomerationArray = await resAgglomerationArray.json();
 
-        const resVehicleArray = await fetch(`${SERVER_URL}/transportsBy`);
-        const dataVehicleArray = await resVehicleArray.json();
+      const resVehicleArray = await fetch(`${SERVER_URL}/transportsBy`);
+      const dataVehicleArray = await resVehicleArray.json();
 
-        const resSatisfactionArray = await fetch(`${SERVER_URL}/satisfactions`);
-        const dataSatisfactionArray = await resSatisfactionArray.json();
+      const resSatisfactionArray = await fetch(`${SERVER_URL}/satisfactions`);
+      const dataSatisfactionArray = await resSatisfactionArray.json();
 
-        setVehicleArray(dataVehicleArray)
-        setAgglomerationArray(dataAgglomerationArray)
-        setSatisfactionArray(dataSatisfactionArray)
-        setUser(dataUser);
-        setVehicleId(dataVehicleArray[0].id)
-        setAgglomerationId(dataAgglomerationArray[0].id)
-        setSatisfactionId(dataSatisfactionArray[0].id)
-        setVehicleOption(dataVehicleArray[0].vehicleType)
-        setAgglomeration(dataAgglomerationArray[0].description)
-        
-    }catch (error) {
-        console.log(error);
+      setVehicleArray(dataVehicleArray);
+      setAgglomerationArray(dataAgglomerationArray);
+      setSatisfactionArray(dataSatisfactionArray);
+      setUser(dataUser);
+      setVehicleId(dataVehicleArray[0].id);
+      setAgglomerationId(dataAgglomerationArray[0].id);
+      setSatisfactionId(dataSatisfactionArray[0].id);
+      setVehicleOption(dataVehicleArray[0].vehicleType);
+      setAgglomeration(dataAgglomerationArray[0].description);
+    } catch (error) {
+      console.log(error);
     } finally {
-        setIsLoading(false);
+      setIsLoading(false);
     }
-  }
+  };
 
   useEffect(() => {
     getData();
-  },[]);
+  }, []);
 
-  function handleAgllomeration(event){
-      setTrafficOption(event.target.value)
-      setAgglomerationId(agglomerationArray[event.target.selectedIndex].id) 
+  function handleAgllomeration(event) {
+    setTrafficOption(event.target.value);
+    setAgglomerationId(agglomerationArray[event.target.selectedIndex].id);
   }
 
-  function handleVehicle(event){
-      setVehicleOption(event.target.value)
-      setVehicleId(vehicleArray[event.target.selectedIndex].id)
+  function handleVehicle(event) {
+    setVehicleOption(event.target.value);
+    setVehicleId(vehicleArray[event.target.selectedIndex].id);
   }
 
-  function handleSatisfaction(event){
-      setSatisfactionOption(event.target.value)
-      item.SatisfactionId = satisfactionArray[event.target.selectedIndex].id
+  function handleSatisfaction(event) {
+    setSatisfactionOption(event.target.value);
+    item.SatisfactionId = satisfactionArray[event.target.selectedIndex].id;
   }
 
   const handleSubmit = async (e) => {
@@ -101,12 +100,12 @@ function NewPostForm(props) {
         position: toast.POSITION.TOP_RIGHT,
         autoClose: 3000,
         style: {
-          marginTop: "5rem"
-        }
+          marginTop: "5rem",
+        },
       });
       return;
     }
-    
+
     // creaza obiectul de post
 
     const post = Object.assign({
@@ -121,7 +120,7 @@ function NewPostForm(props) {
       TransportById: vehicleId,
       AgglomerationId: agglomerationId,
     });
-    console.log(JSON.stringify(post))
+    console.log(JSON.stringify(post));
     try {
       const res = await fetch(`${SERVER_URL}/newExperience`, {
         method: "post",
@@ -136,19 +135,19 @@ function NewPostForm(props) {
           position: toast.POSITION.TOP_RIGHT,
           autoClose: 1000,
           style: {
-            marginTop: "5rem"
-          }
+            marginTop: "5rem",
+          },
         });
         setTimeout(() => {
-          navigate('/newPost');
-        }, 2000);
+          navigate("/private");
+        }, 1000);
       } else {
         toast.error("Error creating post", {
           position: toast.POSITION.TOP_RIGHT,
           autoClose: 3000,
           style: {
-            marginTop: "5rem"
-          }
+            marginTop: "5rem",
+          },
         });
       }
     } catch (err) {
@@ -157,46 +156,53 @@ function NewPostForm(props) {
         position: toast.POSITION.TOP_RIGHT,
         autoClose: 3000,
         style: {
-          marginTop: "5rem"
-        }
+          marginTop: "5rem",
+        },
       });
     }
   };
 
   const handleClick = (e) => {
     const selectedIcon = e.target;
-    const icons = document.querySelectorAll('.star-rating img');
-    icons.forEach(icon => {
+    const icons = document.querySelectorAll(".star-rating img");
+    icons.forEach((icon) => {
       icon.classList.remove("selected");
       icon.classList.add("deselected");
     });
     selectedIcon.classList.remove("deselected");
     selectedIcon.classList.add("selected");
     const key = e.target.dataset.key;
-    setSatisfactionId(key)
-  }
+    setSatisfactionId(key);
+  };
 
- 
   function renderSwitch(satisfactionLevel, satisfactionId) {
     let image;
     switch (satisfactionLevel) {
-      case 'Extremely satisfied':
+      case "Extremely satisfied":
         image = extremelySatisfied;
         break;
-      case 'Very satisfied':
+      case "Very satisfied":
         image = verySatisfied;
         break;
-      case 'Satisfied':
+      case "Satisfied":
         image = satisfied;
         break;
-      case 'Slightly satisfied':
+      case "Slightly satisfied":
         image = slightlySatisfied;
         break;
       default:
         image = notSatisfied;
         break;
     }
-    return <img src={image} alt="Satisfaction level" key = {satisfactionId} data-key= {satisfactionId} onClick={handleClick} />
+    return (
+      <img
+        src={image}
+        alt="Satisfaction level"
+        key={satisfactionId}
+        data-key={satisfactionId}
+        onClick={handleClick}
+      />
+    );
   }
 
   return (
@@ -220,12 +226,18 @@ function NewPostForm(props) {
           />
         </label>
         <br />
-        <label>
-          Method of transportation:
-        </label>
+        <label>Method of transportation:</label>
         <div>
-          <select className='dropdown' value={vehicleOption} onChange={handleVehicle}>
-            {vehicleArray.map((v) => (<option key={v.id} value={v.vehicleType}>{v.vehicleType}</option>))}
+          <select
+            className="dropdown"
+            value={vehicleOption}
+            onChange={handleVehicle}
+          >
+            {vehicleArray.map((v) => (
+              <option key={v.id} value={v.vehicleType}>
+                {v.vehicleType}
+              </option>
+            ))}
           </select>
         </div>
         <br />
@@ -248,12 +260,18 @@ function NewPostForm(props) {
           />
         </label>
         <br />
-        <label>
-          Crowdedness:
-        </label>
+        <label>Crowdedness:</label>
         <div>
-          <select className='dropdown' value={trafficOption} onChange={handleAgllomeration}>
-            {agglomerationArray.map((a) => (<option key={a.id} value={a.description}>{a.description}</option>))}
+          <select
+            className="dropdown"
+            value={trafficOption}
+            onChange={handleAgllomeration}
+          >
+            {agglomerationArray.map((a) => (
+              <option key={a.id} value={a.description}>
+                {a.description}
+              </option>
+            ))}
           </select>
         </div>
         <br />
@@ -268,16 +286,14 @@ function NewPostForm(props) {
         <label>
           Satisfaction:
           <div className="star-rating">
-            {satisfactionArray.map((s) => ( renderSwitch(s.level, s.id) ))}
+            {satisfactionArray.map((s) => renderSwitch(s.level, s.id))}
           </div>
         </label>
         <br />
-        <label>
-          Share:
-        </label>
+        <label>Share:</label>
         <input
           type="checkbox"
-          className='card-checkbox'
+          className="card-checkbox"
           checked={shared}
           onChange={() => setShared(!shared)}
         />

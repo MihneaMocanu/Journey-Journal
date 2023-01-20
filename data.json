@@ -71,6 +71,10 @@
     {
       "id": "4832c8c6-0bc0-4a6f-a5f6-1391d89b18d5",
       "vehicleType": "Scooter"
+    },
+    {
+      "id": "4832c8c6-0bc0-4a6f-a5f6-1391d77b18d5",
+      "vehicleType": "Plane"
     }
   ],
   "user": [
@@ -113,7 +117,7 @@
     {
       "id": "64975d42-7028-45dc-a587-a0c03530062e",
       "start_adress": "Berlin",
-      "end_adress": "Berlin",
+      "end_adress": "London",
       "start_date": "2022-05-06",
       "observation": "",
       "duration_minutes": 40,
